@@ -45,7 +45,7 @@ trait HasAreaStyle
     protected function enableAreaStyle()
     {
         if ($this->lacksAreaStyle()) {
-            $this->areaStyle = new AreaStyle();
+            $this->areaStyle = new AreaStyle;
         }
     }
 
