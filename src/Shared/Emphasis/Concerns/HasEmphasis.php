@@ -41,7 +41,7 @@ trait HasEmphasis
     protected function enableEmphasis()
     {
         if ($this->lacksEmphasis()) {
-            $this->emphasis = new Emphasis();
+            $this->emphasis = new Emphasis;
         }
     }
 
