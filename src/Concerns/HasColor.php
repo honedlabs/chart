@@ -8,15 +8,15 @@ trait HasColor
 {
     /**
      * The color to use.
-     * 
+     *
      * @var string|null
      */
     protected $color;
 
     /**
      * Set the color to use.
-     * 
-     * @param string $color
+     *
+     * @param  string  $color
      * @return $this
      */
     public function color($color)
@@ -28,7 +28,7 @@ trait HasColor
 
     /**
      * Get the color to use.
-     * 
+     *
      * @return string|null
      */
     public function getColor()
@@ -38,8 +38,8 @@ trait HasColor
 
     /**
      * Set the color to use.
-     * 
-     * @param string $color
+     *
+     * @param  string  $color
      * @return $this
      */
     public function colour($color)
@@ -49,7 +49,7 @@ trait HasColor
 
     /**
      * Get the color to use.
-     * 
+     *
      * @return string|null
      */
     public function getColour()

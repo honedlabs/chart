@@ -6,5 +6,5 @@ namespace Honed\Chart\Support;
 
 class Align
 {
-    // const 
+    // const
 }

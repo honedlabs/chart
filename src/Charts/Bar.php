@@ -17,7 +17,7 @@ class Bar
             'barPadding',
             'barMinHeight',
             'dataStep',
-            'orientation'
+            'orientation',
         ];
     }
 }

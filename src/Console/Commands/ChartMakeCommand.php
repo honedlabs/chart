@@ -73,10 +73,10 @@ class ChartMakeCommand extends GeneratorCommand
     {
         return [
             [
-                'force', 
-                'f', 
-                InputOption::VALUE_NONE, 
-                'Create the class even if the '.\strtolower($this->type).' already exists'
+                'force',
+                'f',
+                InputOption::VALUE_NONE,
+                'Create the class even if the '.\strtolower($this->type).' already exists',
             ],
         ];
     }
