@@ -13,18 +13,21 @@ class Axis extends Primitive
 
     /**
      * The display label for this axis.
-     *
+     * 
      * @var string|null
      */
     protected $label;
 
     /**
      * The type of the axis.
-     *
+     * 
      * @var 'x'|'y'
      */
     protected $type;
 
+    /**
+     * 
+     */
     protected $grid;
 
     protected $line;
@@ -36,10 +39,13 @@ class Axis extends Primitive
         return new self;
     }
 
+
+
+
     /**
      * Set the display label for this axis.
-     *
-     * @param  string|null  $label
+     * 
+     * @param string|null $label
      * @return $this
      */
     public function label($label)
@@ -51,7 +57,7 @@ class Axis extends Primitive
 
     /**
      * Get the display label for this axis.
-     *
+     * 
      * @return string|null
      */
     public function getLabel()
@@ -61,7 +67,7 @@ class Axis extends Primitive
 
     /**
      * Set the axis to be for the X axis.
-     *
+     * 
      * @return $this
      */
     public function x()
@@ -73,7 +79,7 @@ class Axis extends Primitive
 
     /**
      * Set the axis to be for the Y axis.
-     *
+     * 
      * @return $this
      */
     public function y()
@@ -110,6 +116,8 @@ class Axis extends Primitive
             'tickTextHideOverlapping' => null,
             'duration' => null,
 
+
         ];
     }
+    
 }

@@ -6,6 +6,7 @@ namespace Honed\Chart\Charts;
 
 class Area
 {
+
     public function toArray()
     {
         return [

@@ -6,6 +6,7 @@ namespace Honed\Chart\Charts;
 
 class Scatter
 {
+
     public function toArray()
     {
         return [
@@ -23,7 +24,7 @@ class Scatter
             'sizeRange',
             'strokeColor',
             'strokeWidth',
-            'shape',
+            'shape'
         ];
     }
 }
