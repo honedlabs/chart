@@ -4,65 +4,133 @@ declare(strict_types=1);
 
 namespace Honed\Chart;
 
-use Honed\Chart\Concerns\HasColor;
+use JsonSerializable;
 use Honed\Core\Primitive;
+use Honed\Chart\Concerns\HasColor;
+use Honed\Chart\Concerns\FiltersUndefined;
+use Illuminate\Contracts\Support\Arrayable;
+use Honed\Chart\Concerns\HasAnimationDuration;
+use Honed\Chart\Exceptions\InvalidAxisException;
+use Honed\Chart\Concerns\ExcludesFromDomainCalculation;
 
-class Axis extends Primitive
+/**
+ * @implements \Illuminate\Contracts\Support\Arrayable<string, mixed>
+ */
+class Axis implements Arrayable, JsonSerializable
 {
     use HasColor;
-
-    /**
-     * The display label for this axis.
-     * 
-     * @var string|null
-     */
-    protected $label;
+    use FiltersUndefined;
+    use ExcludesFromDomainCalculation;
+    use HasAnimationDuration;
 
     /**
      * The type of the axis.
      * 
-     * @var 'x'|'y'
+     * @var 'x'|'y'|null
      */
     protected $type;
 
     /**
+     * Whether to extend the axis domain line to be full width or height.
      * 
+     * @var bool|null
+     */
+    protected $fullSize;
+
+    /**
+     * The display label for this axis.
+     * 
+     * @var \Honed\Chart\Label|null
+     */
+    protected $label;
+
+    /**
+     * Whether to show the grid lines.
+     * 
+     * @var bool|null
      */
     protected $grid;
 
-    protected $line;
-
-    protected $ticks;
-
-    public static function make()
-    {
-        return new self;
-    }
-
-
-
+    /**
+     * Whether to show the grid lines by default.
+     * 
+     * @var bool|null
+     */
+    protected static $defaultGrid;
 
     /**
-     * Set the display label for this axis.
+     * Whether to show the domain lines.
+     * 
+     * @var bool|null
+     */
+    protected $domain;
+
+    /**
+     * Whether to show the domain lines by default.
+     * 
+     * @var bool|null
+     */
+    protected static $defaultDomain;
+
+    /**
+     * Whether to show the tick lines.
+     * 
+     * @var \Honed\Chart\Tick|null
+     */
+    protected $tick;
+
+    /**
+     * Create a new axis.
      * 
      * @param string|null $label
+     * @return static
+     */
+    public static function make($label = null)
+    {
+        return resolve(static::class)
+            ->label($label);
+    }
+
+    /**
+     * Set which axis this is for.
+     * 
+     * @param 'x'|'y' $type
      * @return $this
      */
-    public function label($label)
+    public function type($type)
     {
-        $this->label = $label;
+        $this->type = $type;
 
         return $this;
     }
 
     /**
-     * Get the display label for this axis.
+     * Get the type of the axis.
      * 
-     * @return string|null
+     * @return 'x'|'y'
+     * 
+     * @throws \Honed\Chart\Exceptions\InvalidAxisException
      */
-    public function getLabel()
+    public function getType()
     {
-        return $this->label;
+        if (! in_array($this->type, ['x', 'y'])) {
+            InvalidAxisException::throw($this->type);
+        }
+
+        return $this->type;
+    }
+
+    /**
+     * Set which axis this is for.
+     * 
+     * @param 'x'|'y' $type
+     * @return $this
+     * 
+     * @throws \Honed\Chart\Exceptions\InvalidAxisException
+     */
+    public function for($type)
+    {
+        return $this->type($type);
     }
 
     /**
@@ -72,9 +140,7 @@ class Axis extends Primitive
      */
     public function x()
     {
-        $this->type = 'x';
-
-        return $this;
+        return $this->type('x');
     }
 
     /**
@@ -84,17 +150,48 @@ class Axis extends Primitive
      */
     public function y()
     {
-        $this->type = 'y';
-
-        return $this;
+        return $this->type('y');
     }
 
+    /**
+     * Flush the state of the axis.
+     * 
+     * @return void
+     */
+    public static function flushState()
+    {
+        static::$defaultGrid = null;
+        static::$defaultDomain = null;
+
+        static::flushAnimationDurationState();
+        static::flushExcludeFromDomainCalculationState();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize(): mixed
+    {
+        return $this->toArray();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function toArray()
     {
-        return [
+        return $this->filterUndefined([
             'type' => $this->getType(),
-            'label' => $this->getLabel(),
             'position' => $this->getPosition(),
+            ...($this->getLabel()?->toArray() ?? []),
+            'fullSize' => $this->isFullSize(),
+            'gridLine' => $this->isGrid(),
+            'domainLine' => $this->isDomain(),
+            ...($this->getTick()?->toArray() ?? []),
+            ...$this->excludeFromDomainToArray(),
+            ...$this->animationDurationToArray(),
+
+            
             'labelFontSize' => null,
             'labelColor' => null,
             'labelMargin' => null,
@@ -114,10 +211,11 @@ class Axis extends Primitive
             'minMaxTicksOnly' => null,
             'tickValues' => null,
             'tickTextHideOverlapping' => null,
-            'duration' => null,
-
-
-        ];
+        ]);
     }
-    
+
+    public function __get($name)
+    {
+        dd($name);
+    }
 }

@@ -8,29 +8,29 @@ use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputOption;
 
-#[AsCommand(name: 'make:chart')]
-class ChartMakeCommand extends GeneratorCommand
+#[AsCommand(name: 'make:sankey')]
+class SankeyMakeCommand extends GeneratorCommand
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'make:chart';
+    protected $name = 'make:sankey';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $description = 'Create a new chart class';
+    protected $description = 'Create a new sankey class';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Chart';
+    protected $type = 'Sankey';
 
     /**
      * Get the stub file for the generator.
@@ -39,7 +39,7 @@ class ChartMakeCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return $this->resolveStubPath('/stubs/honed.chart.stub');
+        return $this->resolveStubPath('/stubs/honed.sankey.stub');
     }
 
     /**
@@ -86,7 +86,7 @@ class ChartMakeCommand extends GeneratorCommand
         return [
             'name' => [
                 'What should the '.strtolower($this->type).' be named?',
-                'E.g. UserChart',
+                'E.g. UserSankey',
             ],
         ];
     }
