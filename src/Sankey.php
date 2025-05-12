@@ -16,7 +16,7 @@ class Sankey
             'highlightDuration',
             'highlightDelay',
             'iterations',
-            
+
             'labelBackground',
             'labelFit',
             'labelTrimMode',

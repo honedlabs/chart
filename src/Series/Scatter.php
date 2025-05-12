@@ -12,9 +12,9 @@ use Honed\Chart\Support\Constants;
 
 class Scatter extends Series
 {
+    use ExcludesFromDomainCalculation;
     use HasColor;
     use HasStroke;
-    use ExcludesFromDomainCalculation;
 
     /**
      * {@inheritdoc}

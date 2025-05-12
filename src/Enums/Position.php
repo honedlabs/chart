@@ -13,7 +13,7 @@ enum Position: string
 
     /**
      * Determine if the position is a valid horizontal position.
-     * 
+     *
      * @return bool
      */
     public function isHorizontal()
@@ -23,7 +23,7 @@ enum Position: string
 
     /**
      * Determine if the position is a valid vertical position.
-     * 
+     *
      * @return bool
      */
     public function isVertical()
