@@ -5,28 +5,28 @@ declare(strict_types=1);
 namespace Honed\Chart;
 
 use Honed\Chart\Concerns\FiltersUndefined;
+use JsonSerializable;
 use Honed\Chart\Concerns\HasColor;
 use Honed\Chart\Concerns\HasFont;
 use Illuminate\Contracts\Support\Arrayable;
-use JsonSerializable;
 
 class Label implements Arrayable, JsonSerializable
 {
-    use FiltersUndefined;
-    use HasColor;
     use HasFont;
+    use HasColor;
+    use FiltersUndefined;
 
     /**
      * The label to display.
-     *
+     * 
      * @var string|null
      */
     protected $label;
 
     /**
      * Set the label to display.
-     *
-     * @param  string  $label
+     * 
+     * @param string $label
      * @return $this
      */
     public function label($label)
@@ -38,7 +38,7 @@ class Label implements Arrayable, JsonSerializable
 
     /**
      * Get the label to display.
-     *
+     * 
      * @return string|null
      */
     public function getLabel()
@@ -65,5 +65,5 @@ class Label implements Arrayable, JsonSerializable
             'labelColor' => $this->getColor(),
             'labelMargin' => $this->getMargin(),
         ]);
-    }
+    }    
 }

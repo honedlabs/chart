@@ -4,59 +4,56 @@ declare(strict_types=1);
 
 namespace Honed\Chart;
 
-use Honed\Chart\Concerns\FiltersUndefined;
-use Honed\Chart\Concerns\HasAnimationDuration;
-use Honed\Chart\Exceptions\MissingDataException;
-use Honed\Core\Primitive;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Honed\Chart\Concerns\HasAnimationDuration;
+use Honed\Chart\Exceptions\MissingDataException;
 
 /**
  * @template TData of mixed = mixed
  */
-class Chart extends Primitive
+class Chart extends ChartComponent
 {
-    use FiltersUndefined;
     use HasAnimationDuration;
 
     /**
      * The data of the chart.
-     *
+     * 
      * @var iterable<int, TData>
      */
     protected $data = [];
 
     /**
      * The series of the chart.
-     *
+     * 
      * @var array<int, \Honed\Chart\Series>
      */
     protected $series = [];
 
     /**
      * The domain of the chart.
-     *
+     * 
      * @var array{int|float, int|float}
      */
     protected $domain;
 
     /**
      * The range of the chart.
-     *
+     * 
      * @var array{int|float, int|float}
      */
     protected $range;
 
     /**
      * The legend of the chart.
-     *
+     * 
      * @var \Honed\Chart\Legend|null
      */
     protected $legend;
 
     /**
      * The tooltip of the chart.
-     *
+     * 
      * @var \Honed\Chart\Tooltip|null
      */
     protected $tooltip;
@@ -68,8 +65,8 @@ class Chart extends Primitive
 
     /**
      * Create a new chart instance.
-     *
-     * @param  iterable<int, TData>  $data
+     * 
+     * @param iterable<int, TData> $data
      * @return static
      */
     public static function make($data = [])
@@ -80,8 +77,8 @@ class Chart extends Primitive
 
     /**
      * Set the data of the chart.
-     *
-     * @param  iterable<int, TData>  $data
+     * 
+     * @param iterable<int, TData> $data
      * @return $this
      */
     public function data($data)
@@ -93,7 +90,7 @@ class Chart extends Primitive
 
     /**
      * Define the data of the chart.
-     *
+     * 
      * @return iterable<int, TData>
      */
     public function defineData()
@@ -103,9 +100,9 @@ class Chart extends Primitive
 
     /**
      * Get the data of the chart.
-     *
+     * 
      * @return iterable<int, TData>
-     *
+     * 
      * @throws \Honed\Chart\Exceptions\MissingDataException
      */
     public function getData()
@@ -125,8 +122,8 @@ class Chart extends Primitive
 
     /**
      * Set the series of the chart.
-     *
-     * @param  \Honed\Chart\Series|iterable<int, \Honed\Chart\Series>  ...$series
+     * 
+     * @param \Honed\Chart\Series|iterable<int, \Honed\Chart\Series> ...$series
      * @return $this
      */
     public function series(...$series)
@@ -140,7 +137,7 @@ class Chart extends Primitive
 
     /**
      * Define the series of the chart.
-     *
+     * 
      * @return array<int, \Honed\Chart\Series>
      */
     public function defineSeries()
@@ -150,7 +147,7 @@ class Chart extends Primitive
 
     /**
      * Get the series of the chart.
-     *
+     * 
      * @return array<int, \Honed\Chart\Series>
      */
     public function getSeries()
@@ -160,8 +157,8 @@ class Chart extends Primitive
 
     /**
      * Set the domain of the chart.
-     *
-     * @param  array{int|float, int|float}  $domain
+     * 
+     * @param array{int|float, int|float} $domain
      * @return $this
      */
     public function domain($domain)
@@ -173,7 +170,7 @@ class Chart extends Primitive
 
     /**
      * Define the domain of the chart.
-     *
+     * 
      * @return array{int|float, int|float}
      */
     public function defineDomain()
@@ -183,7 +180,7 @@ class Chart extends Primitive
 
     /**
      * Get the domain of the chart.
-     *
+     * 
      * @return array{int|float, int|float}|null
      */
     public function getDomain()
@@ -193,8 +190,8 @@ class Chart extends Primitive
 
     /**
      * Set the range of the chart.
-     *
-     * @param  array{int|float, int|float}  $range
+     * 
+     * @param array{int|float, int|float} $range
      * @return $this
      */
     public function range($range)
@@ -206,7 +203,7 @@ class Chart extends Primitive
 
     /**
      * Define the range of the chart.
-     *
+     * 
      * @return array{int|float, int|float}
      */
     public function defineRange()
@@ -216,7 +213,7 @@ class Chart extends Primitive
 
     /**
      * Get the range of the chart.
-     *
+     * 
      * @return array{int|float, int|float}|null
      */
     public function getRange()
@@ -226,7 +223,7 @@ class Chart extends Primitive
 
     /**
      * Set the legend to be used for the chart.
-     *
+     * 
      * @return $this
      */
     public function legend()
@@ -238,7 +235,7 @@ class Chart extends Primitive
 
     /**
      * Define the legend to be used for the chart.
-     *
+     * 
      * @return \Honed\Chart\Legend|null
      */
     public function defineLegend()
@@ -248,7 +245,7 @@ class Chart extends Primitive
 
     /**
      * Get the legend to be used for the chart.
-     *
+     * 
      * @return \Honed\Chart\Legend|null
      */
     public function getLegend()
@@ -258,7 +255,7 @@ class Chart extends Primitive
 
     /**
      * Set the tooltip to be used for the chart.
-     *
+     * 
      * @return $this
      */
     public function tooltip()
@@ -270,7 +267,7 @@ class Chart extends Primitive
 
     /**
      * Define the tooltip to be used for the chart.
-     *
+     * 
      * @return \Honed\Chart\Tooltip|null
      */
     public function defineTooltip()
@@ -280,7 +277,7 @@ class Chart extends Primitive
 
     /**
      * Get the tooltip to be used for the chart.
-     *
+     * 
      * @return \Honed\Chart\Tooltip|null
      */
     public function getTooltip()
@@ -291,9 +288,17 @@ class Chart extends Primitive
     /**
      * {@inheritDoc}
      */
-    public function toArray()
+    public static function flushState()
     {
-        return $this->filterUndefined([
+        //
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function representation()
+    {
+        return [
             'data' => $this->getFilteredData(),
             'yDomain' => $this->getDomain(),
             'yDomain' => $this->getRange(),
@@ -304,7 +309,7 @@ class Chart extends Primitive
             'crosshair' => $this->getCrosshair()?->toArray(),
             'tooltip' => $this->getTooltip()?->toArray(),
             'legend' => $this->getLegend()?->toArray(),
-            ...$this->animationDurationToArray(),
-        ]);
+            ...$this->animationDurationToArray()
+        ];
     }
 }

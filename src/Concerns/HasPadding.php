@@ -8,22 +8,22 @@ trait HasPadding
 {
     /**
      * The padding of the element in pixels.
-     *
+     * 
      * @var int|null
      */
     protected $padding;
 
     /**
      * The padding of the element in pixels by default.
-     *
+     * 
      * @var int|null
      */
     protected static $defaultPadding;
 
     /**
      * Set the padding in pixels.
-     *
-     * @param  int  $pixels
+     * 
+     * @param int $pixels
      * @return $this
      */
     public function padding($pixels)
@@ -35,8 +35,8 @@ trait HasPadding
 
     /**
      * Set the padding in pixels.
-     *
-     * @param  int  $pixels
+     * 
+     * @param int $pixels
      * @return $this
      */
     public function pad($pixels)
@@ -46,7 +46,7 @@ trait HasPadding
 
     /**
      * Get the padding in pixels.
-     *
+     * 
      * @return int|null
      */
     public function getPadding()
@@ -56,8 +56,8 @@ trait HasPadding
 
     /**
      * Set the padding in pixels by default.
-     *
-     * @param  int  $pixels
+     * 
+     * @param int $pixels
      * @return void
      */
     public static function usePadding($pixels)
@@ -67,7 +67,7 @@ trait HasPadding
 
     /**
      * Flush the state of the padding.
-     *
+     * 
      * @return void
      */
     public static function flushPaddingState()
@@ -76,15 +76,15 @@ trait HasPadding
     }
 
     /**
-     * Get whether to exclude the series from the domain calculation as an
+     * Get whether to exclude the series from the domain calculation as an 
      * array.
-     *
+     * 
      * @return array<string, mixed>
      */
     public function paddingToArray()
     {
         return [
-            'padding' => $this->getPadding(),
+            'padding' => $this->getPadding()
         ];
     }
 }

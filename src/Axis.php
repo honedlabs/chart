@@ -4,84 +4,77 @@ declare(strict_types=1);
 
 namespace Honed\Chart;
 
-use Honed\Chart\Concerns\ExcludesFromDomainCalculation;
-use Honed\Chart\Concerns\FiltersUndefined;
-use Honed\Chart\Concerns\HasAnimationDuration;
 use Honed\Chart\Concerns\HasColor;
+use Honed\Chart\Concerns\HasAnimationDuration;
 use Honed\Chart\Exceptions\InvalidAxisException;
-use Illuminate\Contracts\Support\Arrayable;
-use JsonSerializable;
+use Honed\Chart\Concerns\ExcludesFromDomainCalculation;
 
-/**
- * @implements \Illuminate\Contracts\Support\Arrayable<string, mixed>
- */
-class Axis implements Arrayable, JsonSerializable
+class Axis extends ChartComponent
 {
-    use ExcludesFromDomainCalculation;
-    use FiltersUndefined;
-    use HasAnimationDuration;
     use HasColor;
+    use ExcludesFromDomainCalculation;
+    use HasAnimationDuration;
 
     /**
      * The type of the axis.
-     *
+     * 
      * @var 'x'|'y'|null
      */
     protected $type;
 
     /**
      * Whether to extend the axis domain line to be full width or height.
-     *
+     * 
      * @var bool|null
      */
     protected $fullSize;
 
     /**
      * The display label for this axis.
-     *
+     * 
      * @var \Honed\Chart\Label|null
      */
     protected $label;
 
     /**
      * Whether to show the grid lines.
-     *
+     * 
      * @var bool|null
      */
     protected $grid;
 
     /**
      * Whether to show the grid lines by default.
-     *
+     * 
      * @var bool|null
      */
     protected static $defaultGrid;
 
     /**
      * Whether to show the domain lines.
-     *
+     * 
      * @var bool|null
      */
     protected $domain;
 
     /**
      * Whether to show the domain lines by default.
-     *
+     * 
      * @var bool|null
      */
     protected static $defaultDomain;
 
     /**
      * Whether to show the tick lines.
-     *
+     * 
      * @var \Honed\Chart\Tick|null
      */
     protected $tick;
 
     /**
      * Create a new axis.
-     *
-     * @param  string|null  $label
+     * 
+     * @param string|null $label
      * @return static
      */
     public static function make($label = null)
@@ -92,8 +85,8 @@ class Axis implements Arrayable, JsonSerializable
 
     /**
      * Set which axis this is for.
-     *
-     * @param  'x'|'y'  $type
+     * 
+     * @param 'x'|'y' $type
      * @return $this
      */
     public function type($type)
@@ -105,9 +98,9 @@ class Axis implements Arrayable, JsonSerializable
 
     /**
      * Get the type of the axis.
-     *
+     * 
      * @return 'x'|'y'
-     *
+     * 
      * @throws \Honed\Chart\Exceptions\InvalidAxisException
      */
     public function getType()
@@ -121,10 +114,10 @@ class Axis implements Arrayable, JsonSerializable
 
     /**
      * Set which axis this is for.
-     *
-     * @param  'x'|'y'  $type
+     * 
+     * @param 'x'|'y' $type
      * @return $this
-     *
+     * 
      * @throws \Honed\Chart\Exceptions\InvalidAxisException
      */
     public function for($type)
@@ -134,7 +127,7 @@ class Axis implements Arrayable, JsonSerializable
 
     /**
      * Set the axis to be for the X axis.
-     *
+     * 
      * @return $this
      */
     public function x()
@@ -144,7 +137,7 @@ class Axis implements Arrayable, JsonSerializable
 
     /**
      * Set the axis to be for the Y axis.
-     *
+     * 
      * @return $this
      */
     public function y()
@@ -154,7 +147,7 @@ class Axis implements Arrayable, JsonSerializable
 
     /**
      * Flush the state of the axis.
-     *
+     * 
      * @return void
      */
     public static function flushState()
@@ -169,17 +162,9 @@ class Axis implements Arrayable, JsonSerializable
     /**
      * {@inheritdoc}
      */
-    public function jsonSerialize(): mixed
+    public function representation()
     {
-        return $this->toArray();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toArray()
-    {
-        return $this->filterUndefined([
+        return [
             'type' => $this->getType(),
             'position' => $this->getPosition(),
             ...($this->getLabel()?->toArray() ?? []),
@@ -190,6 +175,7 @@ class Axis implements Arrayable, JsonSerializable
             ...$this->excludeFromDomainToArray(),
             ...$this->animationDurationToArray(),
 
+            
             'labelFontSize' => null,
             'labelColor' => null,
             'labelMargin' => null,
@@ -209,7 +195,7 @@ class Axis implements Arrayable, JsonSerializable
             'minMaxTicksOnly' => null,
             'tickValues' => null,
             'tickTextHideOverlapping' => null,
-        ]);
+        ];
     }
 
     public function __get($name)
