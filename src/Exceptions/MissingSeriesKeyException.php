@@ -28,6 +28,6 @@ class MissingSeriesKeyException extends \RuntimeException
      */
     public static function throw()
     {
-        throw new self();
+        throw new self;
     }
 }

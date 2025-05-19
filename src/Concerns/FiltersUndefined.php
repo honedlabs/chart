@@ -8,8 +8,8 @@ trait FiltersUndefined
 {
     /**
      * Filter any potential undefined values from an array.
-     * 
-     * @param array<string, mixed> $array
+     *
+     * @param  array<string, mixed>  $array
      * @return array<string, mixed>
      */
     public function filterUndefined($array)

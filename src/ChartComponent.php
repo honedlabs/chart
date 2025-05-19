@@ -19,14 +19,14 @@ abstract class ChartComponent implements Arrayable, JsonSerializable
 
     /**
      * Flush the state of the instance.
-     * 
+     *
      * @return void
      */
     abstract public static function flushState();
 
     /**
      * Get the representation of the instance.
-     * 
+     *
      * @return array<string, mixed>
      */
     abstract public function representation();

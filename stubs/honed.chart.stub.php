@@ -7,21 +7,15 @@ use Honed\Chart\XAxis;
 use Honed\Chart\YAxis;
 
 class Name extends Chart
-// class {{ class }} extends Chart
+    // class {{ class }} extends Chart
 {
     /**
      * Define the aria label of the chart, and to internally identify the chart.
-     * 
+     *
      * @return string
      */
-    public function defineName()
-    {
+    public function defineName() {}
 
-    }
-
-    /**
-     * 
-     */
     public function defineData()
     {
         return [];
@@ -34,7 +28,7 @@ class Name extends Chart
 
     /**
      * Define the x-axis of the chart.
-     * 
+     *
      * @return \Honed\Chart\XAxis
      */
     public function defineXAxis()
@@ -45,7 +39,7 @@ class Name extends Chart
 
     /**
      * Define the y-axis of the chart.
-     * 
+     *
      * @return \Honed\Chart\YAxis
      */
     public function defineYAxis()
@@ -59,4 +53,3 @@ class Name extends Chart
         return Tooltip::make();
     }
 }
-
