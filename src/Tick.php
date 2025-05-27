@@ -16,99 +16,108 @@ use JsonSerializable;
  */
 class Tick implements Arrayable, JsonSerializable
 {
-    use Conditionable;
-    use FiltersUndefined;
-    use HasPadding;
-    use HasWidth;
     use Macroable;
+    use Conditionable;
+    use HasWidth;
+    use HasPadding;
+    use FiltersUndefined;
 
     /**
      * Whether to show the tick line.
-     *
+     * 
      * @var bool|null
      */
     protected $line;
 
     /**
      * Whether to show the tick line by default.
-     *
+     * 
      * @var bool|null
      */
     protected static $defaultLine;
 
     /**
      * How to align the tick with respect to the marker.
-     *
+     * 
      * @var string|null
      */
     protected $align;
 
     /**
      * How to align the tick with respect to the marker by default.
-     *
+     * 
      * @var string|null
      */
     protected static $defaultAlign;
 
+    /**
+     * 
+     */
     protected $trim;
 
+    /**
+     * 
+     */
     protected $trimType;
 
+    /**
+     * 
+     */
     protected $wordBreak;
 
     /**
      * The number of ticks to show.
-     *
+     * 
      * @var int|null
      */
     protected $number;
 
     /**
      * Whether to only display the minimum and maximum ticks.
-     *
+     * 
      * @var bool|null
      */
     protected $minMax;
 
     /**
      * The tick values to use.
-     *
+     * 
      * @var array<int, mixed>|null
      */
     protected $values;
 
     /**
      * The rotation of the text in degrees
-     *
+     * 
      * @var int|null
      */
     protected $rotation;
 
     /**
      * The rotation of the text in degrees by default.
-     *
+     * 
      * @var int|null
      */
     protected static $defaultRotation;
 
     /**
      * Whether overlapping labels should be hidden.
-     *
+     * 
      * @var bool|null
      */
     protected $overlap;
 
     /**
      * Whether overlapping labels should be hidden by default.
-     *
+     * 
      * @var bool|null
      */
     protected static $defaultOverlap;
 
     /**
      * Set whether the tick line should be shown.
-     *
-     * @param  bool  $show
+     * 
+     * @param bool $show
      * @return $this
      */
     public function line($show = true)
@@ -120,8 +129,8 @@ class Tick implements Arrayable, JsonSerializable
 
     /**
      * Set whether the tick line should be shown.
-     *
-     * @param  bool  $show
+     * 
+     * @param bool $show
      * @return void
      */
     public function showLine($show = true)
@@ -131,7 +140,7 @@ class Tick implements Arrayable, JsonSerializable
 
     /**
      * Get whether the tick line should be shown.
-     *
+     * 
      * @return bool|null
      */
     public function showsLine()
@@ -141,8 +150,8 @@ class Tick implements Arrayable, JsonSerializable
 
     /**
      * Set whether the tick line should be shown by default.
-     *
-     * @param  bool  $show
+     * 
+     * @param bool $show
      * @return void
      */
     public static function shouldShowLine($show = true)
@@ -152,8 +161,8 @@ class Tick implements Arrayable, JsonSerializable
 
     /**
      * Set the tick values to use.
-     *
-     * @param  iterable<int, mixed>  $values
+     * 
+     * @param iterable<int, mixed> $values
      * @return $this
      */
     public function values($values)
@@ -169,7 +178,7 @@ class Tick implements Arrayable, JsonSerializable
 
     /**
      * Get the tick values to use.
-     *
+     * 
      * @return array<int, mixed>|null
      */
     public function getValues()
@@ -179,8 +188,8 @@ class Tick implements Arrayable, JsonSerializable
 
     /**
      * Set the rotation of the text.
-     *
-     * @param  int  $degrees
+     * 
+     * @param int $degrees
      * @return $this
      */
     public function rotation($degrees)
@@ -192,8 +201,8 @@ class Tick implements Arrayable, JsonSerializable
 
     /**
      * Set the rotation of the text.
-     *
-     * @param  int  $degrees
+     * 
+     * @param int $degrees
      * @return $this
      */
     public function rotate($degrees)
@@ -203,8 +212,8 @@ class Tick implements Arrayable, JsonSerializable
 
     /**
      * Set the rotation of the text.
-     *
-     * @param  int  $degrees
+     * 
+     * @param int $degrees
      * @return $this
      */
     public function angle($degrees)
@@ -214,7 +223,7 @@ class Tick implements Arrayable, JsonSerializable
 
     /**
      * Get the rotation of the text.
-     *
+     * 
      * @return int|null
      */
     public function getRotation()
@@ -224,8 +233,8 @@ class Tick implements Arrayable, JsonSerializable
 
     /**
      * Set the rotation of the text by default.
-     *
-     * @param  int  $degrees
+     * 
+     * @param int $degrees
      * @return void
      */
     public static function useRotation($degrees)
@@ -235,8 +244,8 @@ class Tick implements Arrayable, JsonSerializable
 
     /**
      * Set whether overlapping labels should be hidden.
-     *
-     * @param  bool  $hide
+     * 
+     * @param bool $hide
      * @return $this
      */
     public function overlap($hide = true)
@@ -248,8 +257,8 @@ class Tick implements Arrayable, JsonSerializable
 
     /**
      * Set whether overlapping labels should be hidden.
-     *
-     * @param  bool  $hide
+     * 
+     * @param bool $hide
      * @return $this
      */
     public function hideOverlaps($hide = true)
@@ -259,7 +268,7 @@ class Tick implements Arrayable, JsonSerializable
 
     /**
      * Get whether overlapping labels should be hidden.
-     *
+     * 
      * @return bool|null
      */
     public function hidesOverlapping()
@@ -269,8 +278,8 @@ class Tick implements Arrayable, JsonSerializable
 
     /**
      * Set whether overlapping labels should be hidden by default.
-     *
-     * @param  bool  $hide
+     * 
+     * @param bool $hide
      * @return void
      */
     public static function shouldHideOverlaps($hide = true)
@@ -280,7 +289,7 @@ class Tick implements Arrayable, JsonSerializable
 
     /**
      * Flush the state of the tick.
-     *
+     * 
      * @return void
      */
     public static function flushState()
@@ -291,13 +300,13 @@ class Tick implements Arrayable, JsonSerializable
 
     /**
      * Get the colour configuration as an array.
-     *
+     * 
      * @return array<string, mixed>
      */
     public function colorToArray()
     {
         return [
-            'tickTextColor' => $this->getColor(),
+            'tickTextColor' => $this->getColor()
         ];
     }
 

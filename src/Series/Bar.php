@@ -8,73 +8,74 @@ use Honed\Chart\Concerns\ExcludesFromDomainCalculation;
 use Honed\Chart\Concerns\HasColor;
 use Honed\Chart\Concerns\HasOrientation;
 use Honed\Chart\Series;
+use Honed\Chart\Enums\Orientation;
 use Honed\Chart\Support\Constants;
 
 class Bar extends Series
 {
-    use ExcludesFromDomainCalculation;
     use HasColor;
+    use ExcludesFromDomainCalculation;
     use HasOrientation;
 
     /**
      * The type of the bar series.
-     *
+     * 
      * @var 'grouped'|'stacked'
      */
     protected $type = 'grouped';
 
     /**
      * Whether to round the corners of the bar segement.
-     *
+     * 
      * @var int|bool|null
      */
     protected $roundCorners;
 
     /**
      * Whether to round the corners of the bar segement by default.
-     *
+     * 
      * @var int|bool|null
      */
     protected static $defaultRoundCorners;
 
     /**
      * The width of each bar in pixels.
-     *
+     * 
      * @var int|null
      */
     protected $barWidth;
 
     /**
      * The default width of each bar in pixels.
-     *
+     * 
      * @var int|null
      */
     protected static $defaultBarWidth;
 
     /**
      * The maximum width of each bar in pixels.
-     *
+     * 
      * @var int|null
      */
     protected $barMaxWidth;
 
     /**
      * The default maximum width of each bar in pixels.
-     *
+     * 
      * @var int|null
      */
     protected static $defaultBarMaxWidth;
 
     /**
      * The padding between each bar sector as a percentage of the sector.
-     *
+     * 
      * @var int|null
      */
     protected $padding;
 
     /**
      * The default padding between each bar sector as a percentage of the sector.
-     *
+     * 
      * @var int|null
      */
     protected static $defaultPadding;
@@ -82,7 +83,7 @@ class Bar extends Series
     /**
      * The minimum height of each bar in pixels to prevent them from
      * becoming invisible.
-     *
+     * 
      * @var int|null
      */
     protected $minHeight;
@@ -90,7 +91,7 @@ class Bar extends Series
     /**
      * The default minimum height of each bar in pixels to prevent them from
      * becoming invisible.
-     *
+     * 
      * @var int|null
      */
     protected static $defaultMinHeight;
@@ -105,8 +106,8 @@ class Bar extends Series
 
     /**
      * Set whether to round the corners of the bar segement.
-     *
-     * @param  int|bool  $roundCorners
+     * 
+     * @param int|bool $roundCorners
      * @return $this
      */
     public function roundCorners($roundCorners = true)
@@ -118,7 +119,7 @@ class Bar extends Series
 
     /**
      * Get whether to round the corners of the bar segement.
-     *
+     * 
      * @return bool|null
      */
     public function isRoundCorners()
@@ -128,8 +129,8 @@ class Bar extends Series
 
     /**
      * Set whether to round the corners of the bar segement by default.
-     *
-     * @param  bool  $roundCorners
+     * 
+     * @param bool $roundCorners
      * @return void
      */
     public static function shouldRoundCorners($roundCorners = true)
@@ -139,8 +140,8 @@ class Bar extends Series
 
     /**
      * Set the width of each bar in pixels.
-     *
-     * @param  int  $pixels
+     * 
+     * @param int $pixels
      * @return $this
      */
     public function width($pixels)
@@ -152,7 +153,7 @@ class Bar extends Series
 
     /**
      * Get the width of each bar in pixels.
-     *
+     * 
      * @return int|null
      */
     public function getWidth()
@@ -162,8 +163,8 @@ class Bar extends Series
 
     /**
      * Set the default width of each bar in pixels.
-     *
-     * @param  int  $pixels
+     * 
+     * @param int $pixels
      * @return void
      */
     public static function useWidth($pixels)
@@ -173,8 +174,8 @@ class Bar extends Series
 
     /**
      * Set the maximum width of each bar in pixels.
-     *
-     * @param  int  $pixels
+     * 
+     * @param int $pixels
      * @return $this
      */
     public function maxWidth($pixels)
@@ -186,7 +187,7 @@ class Bar extends Series
 
     /**
      * Get the maximum width of each bar in pixels.
-     *
+     * 
      * @return int|null
      */
     public function getMaxWidth()
@@ -196,8 +197,8 @@ class Bar extends Series
 
     /**
      * Set the default width of each bar in pixels.
-     *
-     * @param  int  $pixels
+     * 
+     * @param int $pixels
      * @return void
      */
     public static function useMaxWidth($pixels)
@@ -207,8 +208,8 @@ class Bar extends Series
 
     /**
      * Set the padding between each bar sector as a percentage of the sector.
-     *
-     * @param  int  $padding
+     * 
+     * @param int $padding
      * @return $this
      */
     public function padding($padding)
@@ -220,7 +221,7 @@ class Bar extends Series
 
     /**
      * Get the padding between each bar sector.
-     *
+     * 
      * @return float|null
      */
     public function getPadding()
@@ -236,8 +237,8 @@ class Bar extends Series
 
     /**
      * Set the default padding between each bar sector as a percentage of the sector.
-     *
-     * @param  int  $padding
+     * 
+     * @param int $padding
      * @return void
      */
     public static function usePadding($padding)
@@ -248,8 +249,8 @@ class Bar extends Series
     /**
      * Set the minimum height of each bar in pixels to prevent them from
      * becoming invisible.
-     *
-     * @param  int  $pixels
+     * 
+     * @param int $pixels
      * @return $this
      */
     public function minHeight($pixels)
@@ -261,7 +262,7 @@ class Bar extends Series
 
     /**
      * Get the minimum height of each bar in pixels.
-     *
+     * 
      * @return int|null
      */
     public function getMinHeight()
@@ -271,8 +272,8 @@ class Bar extends Series
 
     /**
      * Set the default minimum height of each bar in pixels.
-     *
-     * @param  int  $pixels
+     * 
+     * @param int $pixels
      * @return void
      */
     public static function useMinHeight($pixels)
@@ -294,7 +295,6 @@ class Bar extends Series
                 'groupPadding',
             ])
         );
-
         return [
             'color',
             'groupWidth',
