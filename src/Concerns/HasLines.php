@@ -10,36 +10,36 @@ trait HasLines
 {
     /**
      * The thickness of the line in pixels.
-     * 
+     *
      * @var int|null
      */
     protected $lineWidth;
 
     /**
      * The default thickness of the line in pixels.
-     * 
+     *
      * @var int
      */
     protected static $defaultLineWidth = 2;
 
     /**
      * The dashes of the line.
-     * 
+     *
      * @var array<int,int>|null
      */
     protected $dashes;
 
     /**
      * The default dashes of the line.
-     * 
+     *
      * @var array<int,int>|null
      */
     protected static $defaultDashes;
 
     /**
      * Set the line width thickness.
-     * 
-     * @param int|null $thickness
+     *
+     * @param  int|null  $thickness
      * @return $this
      */
     public function lineWidth($thickness)
@@ -51,17 +51,18 @@ trait HasLines
 
     /**
      * Set the line width thickness.
-     * 
-     * @param int $thickness
+     *
+     * @param  int  $thickness
      * @return $this
      */
     public function thickness($thickness)
     {
         return $this->lineWidth($thickness);
     }
+
     /**
      * Get the line width thickness.
-     * 
+     *
      * @return int|null
      */
     public function getLineWidth()
@@ -71,8 +72,8 @@ trait HasLines
 
     /**
      * Set the default line width thickness.
-     * 
-     * @param int $thickness
+     *
+     * @param  int  $thickness
      * @return void
      */
     public static function useLineWidth($thickness)
@@ -82,8 +83,8 @@ trait HasLines
 
     /**
      * Set the dashed line configuration.
-     * 
-     * @param int|array<int,int> $dashes
+     *
+     * @param  int|array<int,int>  $dashes
      * @return $this
      */
     public function dashes($dashes)
@@ -95,7 +96,7 @@ trait HasLines
 
     /**
      * Get the dashed line configuration.
-     * 
+     *
      * @return array<int,int>|null
      */
     public function getDashes()
@@ -105,8 +106,8 @@ trait HasLines
 
     /**
      * Set the default dashed line configuration.
-     * 
-     * @param int|array<int,int> $dashes
+     *
+     * @param  int|array<int,int>  $dashes
      * @return void
      */
     public static function useDashes($dashes)
@@ -116,7 +117,7 @@ trait HasLines
 
     /**
      * Get the line configuration as an array.
-     * 
+     *
      * @return array<string, mixed>
      */
     public function linesToArray()
