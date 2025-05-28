@@ -4,58 +4,58 @@ declare(strict_types=1);
 
 namespace Honed\Chart\Series;
 
-use Honed\Chart\Concerns\ExcludesFromDomainCalculation;
-use Honed\Chart\Concerns\HasColor;
-use Honed\Chart\Concerns\HasCurveType;
-use Honed\Chart\Concerns\HasLines;
 use Honed\Chart\Series;
+use Honed\Chart\Concerns\HasColor;
+use Honed\Chart\Concerns\HasLines;
+use Honed\Chart\Concerns\HasCurveType;
+use Honed\Chart\Concerns\ExcludesFromDomainCalculation;
 use Honed\Chart\Support\Constants;
 
 class Line extends Series
 {
-    use ExcludesFromDomainCalculation;
     use HasColor;
-    use HasCurveType;
     use HasLines;
+    use HasCurveType;
+    use ExcludesFromDomainCalculation;
 
     /**
      * Whether to interpolate missing data.
-     *
+     * 
      * @var bool|null
      */
     protected $interpolate;
 
     /**
      * Whether to interpolate missing data by default.
-     *
+     * 
      * @var bool|null
      */
     protected static $defaultInterpolate;
 
     /**
      * The fallback value to use for missing data.
-     *
+     * 
      * @var mixed
      */
     protected $fallback;
 
     /**
      * The default fallback value to use for missing data.
-     *
+     * 
      * @var mixed
      */
     protected static $defaultFallback;
 
     /**
      * Whether to highlight the line on hover.
-     *
+     * 
      * @var bool|null
      */
     protected $highlight;
 
     /**
      * Whether to highlight the line on hover by default.
-     *
+     * 
      * @var bool|null
      */
     protected static $defaultHighlight;
@@ -70,8 +70,8 @@ class Line extends Series
 
     /**
      * Set whether to interpolate missing data.
-     *
-     * @param  bool  $interpolate
+     * 
+     * @param bool $interpolate
      * @return $this
      */
     public function interpolate($interpolate = true)
@@ -83,7 +83,7 @@ class Line extends Series
 
     /**
      * Get whether to interpolate missing data.
-     *
+     * 
      * @return bool|null
      */
     public function interpolates()
@@ -93,8 +93,8 @@ class Line extends Series
 
     /**
      * Set whether to interpolate missing data by default.
-     *
-     * @param  bool  $interpolate
+     * 
+     * @param bool $interpolate
      * @return void
      */
     public static function shouldInterpolate($interpolate = true)
@@ -104,8 +104,8 @@ class Line extends Series
 
     /**
      * Set the fallback value to use for missing data.
-     *
-     * @param  mixed  $value
+     * 
+     * @param mixed $value
      * @return $this
      */
     public function fallback($value)
@@ -117,7 +117,7 @@ class Line extends Series
 
     /**
      * Get the fallback value to use for missing data.
-     *
+     * 
      * @return mixed
      */
     public function getFallback()
@@ -127,8 +127,8 @@ class Line extends Series
 
     /**
      * Set the default fallback value to use for missing data.
-     *
-     * @param  mixed  $value
+     * 
+     * @param mixed $value
      * @return void
      */
     public static function useFallback($value)
@@ -138,8 +138,8 @@ class Line extends Series
 
     /**
      * Set whether to highlight the line on hover.
-     *
-     * @param  bool  $highlight
+     * 
+     * @param bool $highlight
      * @return $this
      */
     public function highlight($highlight = true)
@@ -151,7 +151,7 @@ class Line extends Series
 
     /**
      * Get whether to highlight the line on hover.
-     *
+     * 
      * @return bool|null
      */
     public function highlights()
@@ -161,8 +161,8 @@ class Line extends Series
 
     /**
      * Set whether to highlight the line on hover by default.
-     *
-     * @param  bool  $highlight
+     * 
+     * @param bool $highlight
      * @return void
      */
     public static function shouldHighlight($highlight = true)
