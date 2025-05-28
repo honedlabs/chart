@@ -10,48 +10,48 @@ trait HasStroke
 {
     /**
      * The thickness of the stroke.
-     * 
+     *
      * @var int|null
      */
     protected $stroke;
 
     /**
      * The default thickness of the stroke.
-     * 
+     *
      * @var int|null
      */
     protected static $defaultStroke;
 
     /**
      * The color of the stroke.
-     * 
+     *
      * @var string|null
      */
     protected $strokeColor;
 
     /**
      * The default color of the stroke.
-     * 
+     *
      * @var string|null
      */
     protected static $defaultStrokeColor;
-    
+
     /**
      * Set the thickness of the stroke.
-     * 
-     * @param int $stroke
+     *
+     * @param  int  $stroke
      * @return $this
      */
     public function stroke($stroke)
     {
         $this->stroke = $stroke;
-        
+
         return $this;
     }
 
     /**
      * Get the thickness of the stroke.
-     * 
+     *
      * @return int|null
      */
     public function getStroke()
@@ -61,8 +61,8 @@ trait HasStroke
 
     /**
      * Set the default thickness of the stroke.
-     * 
-     * @param int $stroke
+     *
+     * @param  int  $stroke
      * @return void
      */
     public static function useStroke($stroke)
@@ -72,21 +72,21 @@ trait HasStroke
 
     /**
      * Set the color of the stroke.
-     * 
-     * @param string $color
+     *
+     * @param  string  $color
      * @return $this
      */
     public function strokeColor($color)
     {
         $this->strokeColor = $color;
-        
+
         return $this;
     }
 
     /**
      * Set the colour of the stroke.
-     * 
-     * @param string $colour
+     *
+     * @param  string  $colour
      * @return $this
      */
     public function strokeColour($colour)
@@ -98,7 +98,7 @@ trait HasStroke
 
     /**
      * Get the color of the stroke.
-     * 
+     *
      * @return string|null
      */
     public function getStrokeColor()
@@ -114,7 +114,7 @@ trait HasStroke
 
     /**
      * Get the colour of the stroke.
-     * 
+     *
      * @return string|null
      */
     public function getStrokeColour()
@@ -124,8 +124,8 @@ trait HasStroke
 
     /**
      * Set the default color of the stroke.
-     * 
-     * @param string $color
+     *
+     * @param  string  $color
      * @return void
      */
     public static function useStrokeColor($color)
@@ -135,8 +135,8 @@ trait HasStroke
 
     /**
      * Set the default colour of the stroke.
-     * 
-     * @param string $colour
+     *
+     * @param  string  $colour
      * @return void
      */
     public static function useStrokeColour($colour)
@@ -146,7 +146,7 @@ trait HasStroke
 
     /**
      * Flush the state of the stroke.
-     * 
+     *
      * @return void
      */
     public static function flushStrokeState()
@@ -157,7 +157,7 @@ trait HasStroke
 
     /**
      * Get the stroke configuration as an array.
-     * 
+     *
      * @return array<string, mixed>
      */
     public function strokeToArray()
