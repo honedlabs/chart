@@ -6,7 +6,4 @@ namespace Honed\Chart\Series;
 
 use Honed\Chart\Charts\Bar;
 
-class Stack extends Bar
-{
-    
-}
+class Stack extends Bar {}
