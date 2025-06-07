@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace Honed\Chart\Exceptions;
 
-class MissingDataException extends \RuntimeException
+use RuntimeException;
+
+use function sprintf;
+
+class MissingDataException extends RuntimeException
 {
     /**
      * Create a new missing data exception.
@@ -12,7 +16,7 @@ class MissingDataException extends \RuntimeException
     public function __construct()
     {
         parent::__construct(
-            \sprintf(
+            sprintf(
                 'The chart [%s] has not been supplied with any data.',
                 static::class
             )

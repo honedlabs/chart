@@ -5,39 +5,46 @@ declare(strict_types=1);
 namespace Honed\Chart;
 
 use Honed\Chart\Concerns\FiltersUndefined;
-use Honed\Core\Primitive;
 use Honed\Chart\Concerns\HasAnimationDuration;
 use Honed\Chart\Exceptions\MissingSeriesKeyException;
+use Honed\Core\Primitive;
 
 abstract class Series extends Primitive
 {
-    use HasAnimationDuration;
     use FiltersUndefined;
+    use HasAnimationDuration;
 
     /**
      * The key(s) of the data to be used for the series.
-     * 
+     *
      * @var string|array<int, string>|null
      */
     protected $key;
 
     /**
      * The id to be used for rerieving the data record id.
-     * 
+     *
      * @var string|null
      */
     protected $id;
 
     /**
      * Whether to display the series as a sparkline.
-     * 
+     *
      * @var bool|null
      */
     protected $sparkline;
 
     /**
+     * Get the type of the series.
+     *
+     * @return string
+     */
+    abstract public function getType();
+
+    /**
      * Create a new series instance.
-     * 
+     *
      * @return static
      */
     public static function make()
@@ -46,16 +53,19 @@ abstract class Series extends Primitive
     }
 
     /**
-     * Get the type of the series.
-     * 
-     * @return string
+     * Flush the state of the series.
+     *
+     * @return void
      */
-    abstract public function getType();
+    public static function flushState()
+    {
+        static::flushAnimationDurationState();
+    }
 
     /**
      * Set the key(s) of the data to be used for the series.
-     * 
-     * @param string|array<int, string>|null $key
+     *
+     * @param  string|array<int, string>|null  $key
      * @return $this
      */
     public function key($key)
@@ -67,10 +77,10 @@ abstract class Series extends Primitive
 
     /**
      * Get the key(s) of the data to be used for the series.
-     * 
+     *
      * @return string|array<int, string>
-     * 
-     * @throws \Honed\Chart\Exceptions\MissingSeriesKeyException
+     *
+     * @throws MissingSeriesKeyException
      */
     public function getKey()
     {
@@ -85,8 +95,8 @@ abstract class Series extends Primitive
 
     /**
      * Set the id to be used for rerieving the data record id.
-     * 
-     * @param string|null $id
+     *
+     * @param  string|null  $id
      * @return $this
      */
     public function id($id)
@@ -98,7 +108,7 @@ abstract class Series extends Primitive
 
     /**
      * Get the id to be used for rerieving the data record id.
-     * 
+     *
      * @return string|null
      */
     public function getId()
@@ -108,8 +118,8 @@ abstract class Series extends Primitive
 
     /**
      * Set whether to display the series as a sparkline.
-     * 
-     * @param bool|null $sparkline
+     *
+     * @param  bool|null  $sparkline
      * @return $this
      */
     public function sparkline($sparkline)
@@ -121,22 +131,12 @@ abstract class Series extends Primitive
 
     /**
      * Get whether to display the series is a sparkline.
-     * 
+     *
      * @return bool|null
      */
     public function isSparkline()
     {
         return $this->sparkline;
-    }
-
-    /**
-     * Flush the state of the series.
-     * 
-     * @return void
-     */
-    public static function flushState()
-    {
-        static::flushAnimationDurationState();
     }
 
     /**
