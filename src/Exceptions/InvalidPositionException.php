@@ -4,11 +4,7 @@ declare(strict_types=1);
 
 namespace Honed\Chart\Exceptions;
 
-use RuntimeException;
-
-use function sprintf;
-
-class InvalidPositionException extends RuntimeException
+class InvalidPositionException extends \RuntimeException
 {
     /**
      * Create a new invalid position exception.
@@ -19,7 +15,7 @@ class InvalidPositionException extends RuntimeException
     public function __construct($type, $direction)
     {
         parent::__construct(
-            sprintf(
+            \sprintf(
                 'The provided [%s] position [%s] is invalid.',
                 $direction,
                 $type

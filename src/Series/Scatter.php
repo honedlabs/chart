@@ -10,13 +10,11 @@ use Honed\Chart\Concerns\HasStroke;
 use Honed\Chart\Series;
 use Honed\Chart\Support\Constants;
 
-use function array_merge;
-
 class Scatter extends Series
 {
-    use ExcludesFromDomainCalculation;
     use HasColor;
     use HasStroke;
+    use ExcludesFromDomainCalculation;
 
     /**
      * {@inheritdoc}
@@ -32,7 +30,7 @@ class Scatter extends Series
     public function toArray()
     {
         return $this->filterUndefined(
-            array_merge(parent::toArray(), [
+            \array_merge(parent::toArray(), [
                 'color' => $this->getColor(),
                 'size' => $this->getSize(),
                 // ...$this->shapeToArray(),

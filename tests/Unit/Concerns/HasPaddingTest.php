@@ -5,8 +5,7 @@ declare(strict_types=1);
 use Honed\Chart\Concerns\HasPadding;
 
 beforeEach(function () {
-    $this->class = new class()
-    {
+    $this->class = new class {
         use HasPadding;
     };
 
@@ -38,3 +37,4 @@ it('has array representation', function () {
         ->toBeArray()
         ->toHaveKey('padding');
 });
+

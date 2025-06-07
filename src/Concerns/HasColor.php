@@ -10,15 +10,15 @@ trait HasColor
 {
     /**
      * The color to use.
-     *
+     * 
      * @var string|array<int,string>|null
      */
     protected $color;
 
     /**
      * Set the color to use.
-     *
-     * @param  string  $color
+     * 
+     * @param string $color
      * @return $this
      */
     public function color($color)
@@ -30,8 +30,8 @@ trait HasColor
 
     /**
      * Set the colour to use.
-     *
-     * @param  string  $colour
+     * 
+     * @param string $colour
      * @return $this
      */
     public function colour($colour)
@@ -41,7 +41,7 @@ trait HasColor
 
     /**
      * Get the color to use.
-     *
+     * 
      * @return string|null
      */
     public function getColor()
@@ -59,7 +59,7 @@ trait HasColor
 
     /**
      * Get the colour to use.
-     *
+     * 
      * @return string|null
      */
     public function getColour()
@@ -68,31 +68,9 @@ trait HasColor
     }
 
     /**
-     * Get the colour configuration as an array.
-     *
-     * @return array<string, mixed>
-     */
-    public function colorToArray()
-    {
-        return [
-            'color' => $this->getColor(),
-        ];
-    }
-
-    /**
-     * Get the colour configuration as an array.
-     *
-     * @return array<string, mixed>
-     */
-    public function colourToArray()
-    {
-        return $this->colorToArray();
-    }
-
-    /**
      * Normalize the colour to a valid format.
-     *
-     * @param  string  $color
+     * 
+     * @param string $color
      * @return string
      */
     protected function normalizeColor($color)
@@ -102,12 +80,34 @@ trait HasColor
 
     /**
      * Normalize the colour to a valid format.
-     *
-     * @param  string  $colour
+     * 
+     * @param string $colour
      * @return string
      */
     protected function normalizeColour($colour)
     {
         return $this->normalizeColor($colour);
+    }
+
+    /**
+     * Get the colour configuration as an array.
+     * 
+     * @return array<string, mixed>
+     */
+    public function colorToArray()
+    {
+        return [
+            'color' => $this->getColor()
+        ];
+    }
+
+    /**
+     * Get the colour configuration as an array.
+     * 
+     * @return array<string, mixed>
+     */
+    public function colourToArray()
+    {
+        return $this->colorToArray();
     }
 }

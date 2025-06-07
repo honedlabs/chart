@@ -4,11 +4,7 @@ declare(strict_types=1);
 
 namespace Honed\Chart\Exceptions;
 
-use RuntimeException;
-
-use function sprintf;
-
-class MissingSeriesKeyException extends RuntimeException
+class MissingSeriesKeyException extends \RuntimeException
 {
     /**
      * Create a new missing series key exception.
@@ -16,7 +12,7 @@ class MissingSeriesKeyException extends RuntimeException
     public function __construct()
     {
         parent::__construct(
-            sprintf(
+            \sprintf(
                 'The series [%s] is missing the key to retrieve',
                 static::class
             )
