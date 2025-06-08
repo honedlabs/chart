@@ -6,14 +6,13 @@ namespace Honed\Chart;
 
 class Graph
 {
-
     public function toArray()
     {
         return [
             'data' => [
                 'nodes',
                 'links',
-            ]
+            ],
         ];
     }
 }

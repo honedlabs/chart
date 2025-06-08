@@ -9,11 +9,11 @@ use Honed\Chart\Concerns\HasShape;
 
 class Vertex
 {
-    use HasShape;
     use FiltersUndefined;
-    
+    use HasShape;
+
     // label
-    //sublabel
+    // sublabel
     // nodeGaugeFill
     // nodeGaugeValue
     // nodeLabel
