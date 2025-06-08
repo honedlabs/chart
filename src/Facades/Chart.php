@@ -8,14 +8,14 @@ use Honed\Chart\ChartFactory;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Honed\Chart\ChartFactory
+ * @see ChartFactory
  */
 class Chart extends Facade
 {
     /**
      * Get the root object behind the facade.
      *
-     * @return \Honed\Chart\ChartFactory
+     * @return ChartFactory
      */
     public static function getFacadeRoot()
     {
@@ -25,8 +25,6 @@ class Chart extends Facade
 
     /**
      * Get the registered name of the component.
-     *
-     * @return string
      */
     protected static function getFacadeAccessor(): string
     {

@@ -5,7 +5,8 @@ declare(strict_types=1);
 use Honed\Chart\Concerns\ExcludesFromDomainCalculation;
 
 beforeEach(function () {
-    $this->class = new class {
+    $this->class = new class()
+    {
         use ExcludesFromDomainCalculation;
     };
 
@@ -35,4 +36,3 @@ it('has array representation', function () {
         ->toBeArray()
         ->toHaveKey('excludeFromDomainCalculation');
 });
-
