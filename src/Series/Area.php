@@ -4,52 +4,38 @@ declare(strict_types=1);
 
 namespace Honed\Chart\Charts;
 
-use Honed\Chart\Concerns\ExcludesFromDomainCalculation;
+use Honed\Chart\Series;
 use Honed\Chart\Concerns\HasColor;
 use Honed\Chart\Concerns\HasCurveType;
-use Honed\Chart\Series;
+use Honed\Chart\Concerns\ExcludesFromDomainCalculation;
 use Honed\Chart\Support\Constants;
-
-use function array_merge;
 
 class Area extends Series
 {
-    use ExcludesFromDomainCalculation;
     use HasColor;
     use HasCurveType;
+    use ExcludesFromDomainCalculation;
 
     /**
      * The opacity of the area.
-     *
+     * 
      * @var int
      */
     protected $opacity = 100;
 
     /**
      * Whether to always show an area if the pixel height is less than 1.
-     *
+     * 
      * @var bool|null
      */
     protected $floor;
 
     /**
      * Whether to always show an area if the pixel height is less than 1 by default.
-     *
+     * 
      * @var bool|null
      */
     protected static $defaultFloor;
-
-    /**
-     * Set whether to always show an area if the pixel height is less than 1 by
-     * default.
-     *
-     * @param  bool  $floor
-     * @return void
-     */
-    public static function shouldFloor($floor = true)
-    {
-        static::$defaultFloor = $floor;
-    }
 
     /**
      * {@inheritDoc}
@@ -61,8 +47,8 @@ class Area extends Series
 
     /**
      * Set the opacity of the area.
-     *
-     * @param  int  $opacity
+     * 
+     * @param int $opacity
      * @return $this
      */
     public function opacity($opacity)
@@ -74,18 +60,18 @@ class Area extends Series
 
     /**
      * Get the opacity of the area.
-     *
+     * 
      * @return float
      */
     public function getOpacity()
     {
         return $this->opacity / 100;
-    }
+    }    
 
     /**
      * Set whether to always show an area if the pixel height is less than 1.
-     *
-     * @param  bool  $floor
+     * 
+     * @param bool $floor
      * @return $this
      */
     public function floor($floor = true)
@@ -97,7 +83,7 @@ class Area extends Series
 
     /**
      * Get whether to always show an area if the pixel height is less than 1.
-     *
+     * 
      * @return bool
      */
     public function isFlooring()
@@ -105,10 +91,21 @@ class Area extends Series
         return $this->floor ?? static::$defaultFloor;
     }
 
+    /**
+     * Set whether to always show an area if the pixel height is less than 1 by
+     * default.
+     * 
+     * @param bool $floor
+     * @return void
+     */
+    public static function shouldFloor($floor = true)
+    {
+        static::$defaultFloor = $floor;
+    }
     public function toArray()
     {
         return $this->filterUndefined(
-            array_merge(parent::toArray(), [
+            \array_merge(parent::toArray(), [
                 'color' => $this->getColor(),
                 'curveType' => $this->getCurveType(),
                 // 'baseline' => $this->getBaseline(),

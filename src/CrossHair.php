@@ -4,73 +4,73 @@ declare(strict_types=1);
 
 namespace Honed\Chart;
 
-use Honed\Chart\Concerns\ExcludesFromDomainCalculation;
-use Honed\Chart\Concerns\FiltersUndefined;
-use Honed\Chart\Concerns\HasAnimationDuration;
+use JsonSerializable;
 use Honed\Chart\Concerns\HasColor;
 use Honed\Chart\Concerns\HasStroke;
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Traits\Macroable;
-use JsonSerializable;
+use Honed\Chart\Concerns\FiltersUndefined;
+use Illuminate\Contracts\Support\Arrayable;
+use Honed\Chart\Concerns\HasAnimationDuration;
+use Honed\Chart\Concerns\ExcludesFromDomainCalculation;
 
 /**
  * @implements \Illuminate\Contracts\Support\Arrayable<string, mixed>
  */
 class CrossHair implements Arrayable, JsonSerializable
 {
-    use ExcludesFromDomainCalculation;
+    use Macroable;
     use FiltersUndefined;
-    use HasAnimationDuration;
     use HasColor;
     use HasStroke;
-    use Macroable;
+    use HasAnimationDuration;
+    use ExcludesFromDomainCalculation;
 
     /**
      * Whether to hide the crosshair when far from the pointer.
-     *
+     * 
      * @var bool|null
      */
     protected $hide;
 
     /**
      * Whether to hide the crosshair when far from the pointer by default.
-     *
+     * 
      * @var bool|null
      */
     protected static $defaultHide;
 
     /**
      * The distance from the pointer at which the crosshair is hidden.
-     *
+     * 
      * @var int|null
      */
     protected $hideAt;
 
     /**
-     * The distance from the pointer at which the crosshair is hidden by
+     * The distance from the pointer at which the crosshair is hidden by 
      * default.
-     *
+     * 
      * @var int|null
      */
     protected static $defaultHideAt;
 
     /**
      * Whether to snap the crosshair to the nearest value.
-     *
+     * 
      * @var bool|null
      */
     protected $snap;
-
+    
     /**
      * Whether to snap the crosshair to the nearest value by default.
-     *
+     * 
      * @var bool|null
      */
     protected static $defaultSnap;
 
     /**
      * Create a new crosshair instance.
-     *
+     * 
      * @return static
      */
     public static function make()
@@ -79,58 +79,9 @@ class CrossHair implements Arrayable, JsonSerializable
     }
 
     /**
-     * Set whether to hide the crosshair when far from the pointer by default.
-     *
-     * @param  bool  $hide
-     * @return void
-     */
-    public static function shouldHide($hide = true)
-    {
-        static::$defaultHide = $hide;
-    }
-
-    /**
-     * Set the distance from the pointer at which the crosshair is hidden by
-     * default.
-     *
-     * @param  int  $pixels
-     * @return void
-     */
-    public static function useHideDistance($pixels)
-    {
-        static::$defaultHideAt = $pixels;
-    }
-
-    /**
-     * Set whether to snap the crosshair to the nearest value by default.
-     *
-     * @param  bool  $snap
-     * @return void
-     */
-    public static function shouldSnap($snap = true)
-    {
-        static::$defaultSnap = $snap;
-    }
-
-    /**
-     * Flush the state of the crosshair.
-     *
-     * @return void
-     */
-    public static function flushState()
-    {
-        static::$defaultHide = null;
-        static::$defaultHideAt = null;
-        static::$defaultSnap = null;
-        static::flushStrokeState();
-        static::flushAnimationDurationState();
-        static::flushExcludeFromDomainCalculationState();
-    }
-
-    /**
      * Set whether to hide the crosshair when far from the pointer.
-     *
-     * @param  bool  $hide
+     * 
+     * @param bool $hide
      * @return $this
      */
     public function hide($hide = true)
@@ -142,7 +93,7 @@ class CrossHair implements Arrayable, JsonSerializable
 
     /**
      * Get whether to hide the crosshair when far from the pointer.
-     *
+     * 
      * @return bool|null
      */
     public function hides()
@@ -151,9 +102,20 @@ class CrossHair implements Arrayable, JsonSerializable
     }
 
     /**
+     * Set whether to hide the crosshair when far from the pointer by default.
+     * 
+     * @param bool $hide
+     * @return void
+     */
+    public static function shouldHide($hide = true)
+    {
+        static::$defaultHide = $hide;
+    }
+
+    /**
      * Set the distance from the pointer at which the crosshair is hidden.
-     *
-     * @param  int  $pixels
+     * 
+     * @param int $pixels
      * @return $this
      */
     public function hideAt($pixels)
@@ -165,7 +127,7 @@ class CrossHair implements Arrayable, JsonSerializable
 
     /**
      * Get the distance from the pointer at which the crosshair is hidden.
-     *
+     * 
      * @return int|null
      */
     public function getHideDistance()
@@ -174,26 +136,64 @@ class CrossHair implements Arrayable, JsonSerializable
     }
 
     /**
+     * Set the distance from the pointer at which the crosshair is hidden by 
+     * default.
+     * 
+     * @param int $pixels
+     * @return void
+     */
+    public static function useHideDistance($pixels)
+    {
+        static::$defaultHideAt = $pixels;
+    }
+
+    /**
      * Set whether to snap the crosshair to the nearest value.
-     *
-     * @param  bool  $snap
+     * 
+     * @param bool $snap
      * @return $this
      */
     public function snap($snap = true)
     {
         $this->snap = $snap;
-
+        
         return $this;
     }
 
     /**
      * Get whether to snap the crosshair to the nearest value.
-     *
+     * 
      * @return bool|null
      */
     public function snaps()
     {
         return $this->snap ?? static::$defaultSnap;
+    }
+
+    /**
+     * Set whether to snap the crosshair to the nearest value by default.
+     * 
+     * @param bool $snap
+     * @return void
+     */
+    public static function shouldSnap($snap = true)
+    {
+        static::$defaultSnap = $snap;
+    }
+
+    /**
+     * Flush the state of the crosshair.
+     * 
+     * @return void
+     */
+    public static function flushState()
+    {
+        static::$defaultHide = null;
+        static::$defaultHideAt = null;
+        static::$defaultSnap = null;
+        static::flushStrokeState();
+        static::flushAnimationDurationState();
+        static::flushExcludeFromDomainCalculationState();
     }
 
     /**

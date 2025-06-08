@@ -10,37 +10,22 @@ trait HasShape
 {
     /**
      * The type of curve to use.
-     *
+     * 
      * @var string|null
      */
     protected $shape;
 
     /**
      * The default curve type.
-     *
+     * 
      * @var string|null
      */
     protected static $defaultShape;
 
     /**
-     * Set the default bullet shape.
-     *
-     * @param  string|Shape  $shape
-     * @return void
-     */
-    public static function useShape($shape)
-    {
-        if (! $shape instanceof Shape) {
-            $shape = Shape::tryFrom($shape);
-        }
-
-        static::$defaultShape = $shape?->value;
-    }
-
-    /**
      * Set the bullet shape.
-     *
-     * @param  string|Shape  $shape
+     * 
+     * @param string|\Honed\Chart\Enums\Shape $shape
      * @return $this
      */
     public function shape($shape)
@@ -56,7 +41,7 @@ trait HasShape
 
     /**
      * Get the curve type.
-     *
+     * 
      * @return string|null
      */
     public function getShape()
@@ -65,14 +50,29 @@ trait HasShape
     }
 
     /**
+     * Set the default bullet shape.
+     * 
+     * @param string|\Honed\Chart\Enums\Shape $shape
+     * @return void
+     */
+    public static function useShape($shape)
+    {
+        if (! $shape instanceof Shape) {
+            $shape = Shape::tryFrom($shape);
+        }
+
+        static::$defaultShape = $shape?->value;
+    }
+
+    /**
      * Get the curve type as an array.
-     *
+     * 
      * @return array<string, mixed>
      */
     public function shapeToArray()
     {
         return [
-            'shape' => $this->getShape(),
+            'shape' => $this->getShape()
         ];
     }
 }
