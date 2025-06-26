@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Honed\Chart;
 
-use JsonSerializable;
-use Honed\Chart\Concerns\HasColor;
 use Honed\Chart\Concerns\FiltersUndefined;
+use Honed\Chart\Concerns\HasColor;
 use Honed\Chart\Concerns\HasShape;
 use Illuminate\Contracts\Support\Arrayable;
+use JsonSerializable;
 
 /**
  * @implements \Illuminate\Contracts\Support\Arrayable<string, mixed>
@@ -38,7 +38,7 @@ class LegendItem implements Arrayable, JsonSerializable
             'shape',
             'inactive',
             'hidden',
-            'pointer'
+            'pointer',
         ]);
     }
 }

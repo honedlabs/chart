@@ -10,15 +10,15 @@ trait HasKeys
 {
     /**
      * The keys to use.
-     * 
+     *
      * @var array<string, mixed>|null
      */
     protected $keys;
 
     /**
      * Set the keys to use.
-     * 
-     * @param iterable<string, mixed> $keys
+     *
+     * @param  iterable<string, mixed>  $keys
      * @return $this
      */
     public function keys(...$keys)
@@ -32,12 +32,11 @@ trait HasKeys
 
     /**
      * Get the keys to use.
-     * 
+     *
      * @return array<string, mixed>|null
      */
     public function getKeys()
     {
         return $this->keys;
     }
-    
 }

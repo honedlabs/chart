@@ -5,7 +5,8 @@ declare(strict_types=1);
 use Honed\Chart\Concerns\FiltersUndefined;
 
 beforeEach(function () {
-    $this->class = new class {
+    $this->class = new class()
+    {
         use FiltersUndefined;
     };
 });
@@ -20,4 +21,3 @@ it('filters undefined values', function () {
         'c' => 3,
     ]);
 });
-

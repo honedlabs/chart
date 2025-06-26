@@ -6,17 +6,17 @@ namespace Honed\Chart\Support;
 
 class Constants
 {
-    const LINE_CHART = 'line';
+    public const LINE_CHART = 'line';
 
-    const AREA_CHART = 'area';
+    public const AREA_CHART = 'area';
 
-    const BAR_CHART = 'bar';
+    public const BAR_CHART = 'bar';
 
-    const SCATTER_CHART = 'scatter';
+    public const SCATTER_CHART = 'scatter';
 
-    const TIMELINE_CHART = 'timeline';
+    public const TIMELINE_CHART = 'timeline';
 
-    const PIE_CHART = 'pie';
+    public const PIE_CHART = 'pie';
 
-    const DONUT_CHART = self::PIE_CHART;
+    public const DONUT_CHART = self::PIE_CHART;
 }

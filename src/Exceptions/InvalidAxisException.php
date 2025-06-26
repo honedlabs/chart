@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace Honed\Chart\Exceptions;
 
-class InvalidAxisException extends \RuntimeException
+use RuntimeException;
+
+use function sprintf;
+
+class InvalidAxisException extends RuntimeException
 {
     /**
      * Create a new invalid action exception.
@@ -14,7 +18,7 @@ class InvalidAxisException extends \RuntimeException
     public function __construct($type)
     {
         parent::__construct(
-            \sprintf(
+            sprintf(
                 'The provided axis type [%s] is invalid.',
                 $type
             )
