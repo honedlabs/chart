@@ -4,315 +4,91 @@ declare(strict_types=1);
 
 namespace Honed\Chart;
 
-use Honed\Chart\Concerns\HasAnimationDuration;
-use Honed\Chart\Exceptions\MissingDataException;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
+use Honed\Core\Primitive;
+use Honed\Chart\Concerns\HasData;
+use Honed\Chart\Concerns\HasSeries;
+use Honed\Chart\Concerns\Animatable;
+use Honed\Chart\Concerns\HasTooltip;
+use Honed\Chart\Concerns\HasTextStyle;
+use Honed\Core\Contracts\NullsAsUndefined;
+use Honed\Chart\Concerns\HasAxes;
+use Honed\Chart\Concerns\HasLegend;
+use Honed\Chart\Concerns\HasTitle;
+use Honed\Chart\Concerns\HasToolbox;
+use Honed\Chart\Concerns\CanBePolar;
+use Honed\Chart\Concerns\HasAxisPointer;
+use Honed\Chart\Concerns\HasGrid;
+use Honed\Chart\Style\Concerns\HasBackgroundColor;
 
-use function array_merge;
-use function is_null;
-
-/**
- * @template TData of mixed = mixed
- */
-class Chart extends ChartComponent
+class Chart extends Primitive implements NullsAsUndefined
 {
-    use HasAnimationDuration;
-
-    /**
-     * The data of the chart.
-     *
-     * @var iterable<int, TData>
-     */
-    protected $data = [];
-
-    /**
-     * The series of the chart.
-     *
-     * @var array<int, Series>
-     */
-    protected $series = [];
-
-    /**
-     * The domain of the chart.
-     *
-     * @var array{int|float, int|float}
-     */
-    protected $domain;
-
-    /**
-     * The range of the chart.
-     *
-     * @var array{int|float, int|float}
-     */
-    protected $range;
-
-    /**
-     * The legend of the chart.
-     *
-     * @var Legend|null
-     */
-    protected $legend;
-
-    /**
-     * The tooltip of the chart.
-     *
-     * @var Tooltip|null
-     */
-    protected $tooltip;
-
-    /**
-     * The colors to use for the chart series.
-     */
-    protected $colors;
+    use HasData;
+    use HasSeries;
+    use Animatable;
+    use HasTextStyle;
+    use HasTooltip;
+    use HasLegend;
+    use HasAxes;
+    use CanBePolar;
+    use HasToolbox;
+    use HasTitle;
+    use HasBackgroundColor;
+    use HasGrid;
+    use HasAxisPointer;
 
     /**
      * Create a new chart instance.
-     *
-     * @param  iterable<int, TData>  $data
-     * @return static
      */
-    public static function make($data = [])
+    public static function make(mixed $data = null): static
     {
-        return resolve(static::class)
-            ->data($data);
+        return resolve(static::class)->data($data);
+    }
+
+    /**
+     * Resolve the data into the components.
+     */
+    protected function resolve(): void
+    {
+        foreach ($this->getAxes() as $axis) {
+            $axis->resolve($this->getData());
+        }
+
+        foreach ($this->getSeries() as $series) {
+            $series->resolve($this->getData());
+        }
     }
 
     /**
      * {@inheritDoc}
      */
-    public static function flushState()
+    protected function representation(): array
     {
-        //
-    }
+        $this->define();
 
-    /**
-     * Set the data of the chart.
-     *
-     * @param  iterable<int, TData>  $data
-     * @return $this
-     */
-    public function data($data)
-    {
-        $this->data = $data;
+        $this->resolve();
 
-        return $this;
-    }
-
-    /**
-     * Define the data of the chart.
-     *
-     * @return iterable<int, TData>
-     */
-    public function defineData()
-    {
-        return [];
-    }
-
-    /**
-     * Get the data of the chart.
-     *
-     * @return iterable<int, TData>
-     *
-     * @throws MissingDataException
-     */
-    public function getData()
-    {
-        $this->data ??= $this->defineData();
-
-        if (is_null($this->data)) {
-            MissingDataException::throw();
-        }
-
-        if ($this->data instanceof Collection) {
-            $this->data = $this->data->all();
-        }
-
-        return $this->data;
-    }
-
-    /**
-     * Set the series of the chart.
-     *
-     * @param  Series|iterable<int, Series>  ...$series
-     * @return $this
-     */
-    public function series(...$series)
-    {
-        $series = Arr::flatten($series);
-
-        $this->series = array_merge($this->series, $series);
-
-        return $this;
-    }
-
-    /**
-     * Define the series of the chart.
-     *
-     * @return array<int, Series>
-     */
-    public function defineSeries()
-    {
-        return [];
-    }
-
-    /**
-     * Get the series of the chart.
-     *
-     * @return array<int, Series>
-     */
-    public function getSeries()
-    {
-        return array_merge($this->defineSeries(), $this->series);
-    }
-
-    /**
-     * Set the domain of the chart.
-     *
-     * @param  array{int|float, int|float}  $domain
-     * @return $this
-     */
-    public function domain($domain)
-    {
-        $this->domain = $domain;
-
-        return $this;
-    }
-
-    /**
-     * Define the domain of the chart.
-     *
-     * @return array{int|float, int|float}
-     */
-    public function defineDomain()
-    {
-        return [];
-    }
-
-    /**
-     * Get the domain of the chart.
-     *
-     * @return array{int|float, int|float}|null
-     */
-    public function getDomain()
-    {
-        return $this->domain ??= $this->defineDomain() ?: null;
-    }
-
-    /**
-     * Set the range of the chart.
-     *
-     * @param  array{int|float, int|float}  $range
-     * @return $this
-     */
-    public function range($range)
-    {
-        $this->range = $range;
-
-        return $this;
-    }
-
-    /**
-     * Define the range of the chart.
-     *
-     * @return array{int|float, int|float}
-     */
-    public function defineRange()
-    {
-        return [];
-    }
-
-    /**
-     * Get the range of the chart.
-     *
-     * @return array{int|float, int|float}|null
-     */
-    public function getRange()
-    {
-        return $this->range ??= $this->defineRange() ?: null;
-    }
-
-    /**
-     * Set the legend to be used for the chart.
-     *
-     * @return $this
-     */
-    public function legend()
-    {
-        $this->legend = true;
-
-        return $this;
-    }
-
-    /**
-     * Define the legend to be used for the chart.
-     *
-     * @return Legend|null
-     */
-    public function defineLegend()
-    {
-        //
-    }
-
-    /**
-     * Get the legend to be used for the chart.
-     *
-     * @return Legend|null
-     */
-    public function getLegend()
-    {
-        return $this->legend ??= $this->defineLegend();
-    }
-
-    /**
-     * Set the tooltip to be used for the chart.
-     *
-     * @return $this
-     */
-    public function tooltip()
-    {
-        $this->tooltip = true;
-
-        return $this;
-    }
-
-    /**
-     * Define the tooltip to be used for the chart.
-     *
-     * @return Tooltip|null
-     */
-    public function defineTooltip()
-    {
-        //
-    }
-
-    /**
-     * Get the tooltip to be used for the chart.
-     *
-     * @return Tooltip|null
-     */
-    public function getTooltip()
-    {
-        return $this->tooltip ??= $this->defineTooltip();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function representation()
-    {
         return [
-            'data' => $this->getFilteredData(),
-            'yDomain' => $this->getDomain(),
-            'yDomain' => $this->getRange(),
-            'series' => $this->seriesToArray(),
-            'duration' => $this->getAnimationDuration(),
-            'xAxis' => $this->getXAxis()?->toArray(),
-            'yAxis' => $this->getYAxis()?->toArray(),
-            'crosshair' => $this->getCrosshair()?->toArray(),
-            'tooltip' => $this->getTooltip()?->toArray(),
+            'title' => $this->getTitle()?->toArray(),
             'legend' => $this->getLegend()?->toArray(),
-            ...$this->animationDurationToArray(),
+            'grid' => $this->getGrid()?->toArray(),
+            'xAxis' => $this->getXAxesToArray(),
+            'yAxis' => $this->getYAxesToArray(),
+            'polar' => $this->getPolar()?->toArray(),
+            // 'radiusAxis' => $this->getRadiusAxis()?->toArray(),
+            // 'angleAxis' => $this->getAngleAxis()?->toArray(),
+            // 'radar' => $this->getRadar()?->toArray(),
+            // 'dataZoom' => $this->getDataZoom()?->toArray(),
+            // 'visualMap' => $this->getVisualMap()?->toArray(),
+            'tooltip' => $this->getTooltip()?->toArray(),
+            'axisPointer' => $this->getAxisPointer()?->toArray(),
+            'toolbox' => $this->getToolbox()?->toArray(),
+            // 'timeline' => $this->getTimeline()?->toArray(),
+            // 'calendar' => $this->getCalendar()?->toArray(),
+            'series' => $this->seriesToArray(),
+            // 'color' => $this->getColor(),
+            'backgroundColor' => $this->getBackgroundColor(),
+            'textStyle' => $this->getTextStyle()?->toArray(),
+            ...$this->getAnimationParameters(),
         ];
     }
 }

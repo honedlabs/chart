@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Honed\Chart;
 
-use Honed\Chart\Console\Commands\ChartMakeCommand;
-use Honed\Chart\Console\Commands\SankeyMakeCommand;
-use Honed\Chart\Console\Commands\TimelineMakeCommand;
+use Honed\Chart\Commands\ChartMakeCommand;
 use Illuminate\Support\ServiceProvider;
 
 class ChartServiceProvider extends ServiceProvider
@@ -25,15 +23,25 @@ class ChartServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if ($this->app->runningInConsole()) {
+            $this->offerPublishing();
+
             $this->commands([
                 ChartMakeCommand::class,
-                TimelineMakeCommand::class,
-                SankeyMakeCommand::class,
             ]);
-
-            $this->publishes([
-                __DIR__.'/../config/chart.php' => config_path('chart.php'),
-            ], 'chart-config');
         }
+    }
+
+    /**
+     * Register the publishing for the package.
+     */
+    protected function offerPublishing(): void
+    {
+        $this->publishes([
+            __DIR__.'/../stubs' => base_path('stubs'),
+        ], 'chart-stubs');
+
+        $this->publishes([
+            __DIR__.'/../config/chart.php' => config_path('chart.php'),
+        ], 'chart-config');
     }
 }

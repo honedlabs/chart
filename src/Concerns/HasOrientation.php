@@ -10,53 +10,48 @@ trait HasOrientation
 {
     /**
      * The orientation to use.
-     *
+     * 
      * @var string|null
      */
     protected $orientation;
 
     /**
-     * The default orientation to be used.
-     *
-     * @var string|null
-     */
-    protected static $defaultOrientation;
-
-    /**
-     * Set the default orientation of the bar.
-     *
-     * @param  string  $orientation
-     * @return void
-     */
-    public static function useOrientation($orientation)
-    {
-        static::$defaultOrientation = $orientation;
-    }
-
-    /**
-     * Set the orientation of the bar.
-     *
-     * @param  string|Orientation  $orientation
+     * Set the orientation of the element.
+     * 
      * @return $this
      */
-    public function orientation($orientation)
+    public function orientation(string|Orientation $orientation): static
     {
-        if (! $orientation instanceof Orientation) {
-            $orientation = Orientation::tryFrom($orientation);
-        }
-
-        $this->orientation = $orientation?->value;
+        $this->orientation = is_string($orientation) ? $orientation : $orientation->value;
 
         return $this;
     }
 
     /**
-     * Get the orientation of the bar.
-     *
-     * @return string|null
+     * Set the orientation of the element to be horizontal.
+     * 
+     * @return $this
      */
-    public function getOrientation()
+    public function horizontal(): static
     {
-        return $this->orientation ?? static::$defaultOrientation;
+        return $this->orientation(Orientation::Horizontal);
+    }
+
+    /**
+     * Set the orientation of the element to be vertical.
+     * 
+     * @return $this
+     */
+    public function vertical(): static
+    {
+        return $this->orientation(Orientation::Vertical);
+    }
+
+    /**
+     * Get the orientation of the element.
+     */
+    public function getOrientation(): ?string
+    {
+        return $this->orientation;
     }
 }

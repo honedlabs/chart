@@ -7,27 +7,16 @@ namespace Honed\Chart\Enums;
 enum Position: string
 {
     case Top = 'top';
+    case Left = 'left';
     case Right = 'right';
     case Bottom = 'bottom';
-    case Left = 'left';
-
-    /**
-     * Determine if the position is a valid horizontal position.
-     *
-     * @return bool
-     */
-    public function isHorizontal()
-    {
-        return $this === self::Left || $this === self::Right;
-    }
-
-    /**
-     * Determine if the position is a valid vertical position.
-     *
-     * @return bool
-     */
-    public function isVertical()
-    {
-        return $this === self::Top || $this === self::Bottom;
-    }
+    case Inside = 'inside';
+    case InsideLeft = 'insideLeft';
+    case InsideRight = 'insideRight';
+    case InsideTop = 'insideTop';
+    case InsideBottom = 'insideBottom';
+    case InsideTopLeft = 'insideTopLeft';
+    case InsideTopRight = 'insideTopRight';
+    case InsideBottomLeft = 'insideBottomLeft';
+    case InsideBottomRight = 'insideBottomRight';
 }
