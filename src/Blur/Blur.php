@@ -14,7 +14,6 @@ class Blur extends Primitive implements NullsAsUndefined
     use HasItemStyle;
     use HasLabel;
 
-
     /**
      * Create a new blur instance.
      */
@@ -25,7 +24,7 @@ class Blur extends Primitive implements NullsAsUndefined
 
     /**
      * Get the representation of the blur.
-     * 
+     *
      * @return array<string, mixed>
      */
     protected function representation(): array

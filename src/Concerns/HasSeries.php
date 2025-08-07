@@ -10,15 +10,15 @@ trait HasSeries
 {
     /**
      * The series.
-     * 
-     * @var array<int, \Honed\Chart\Series\Series>
+     *
+     * @var array<int, Series>
      */
     protected $series = [];
 
     /**
      * Merge the series.
-     * 
-     * @param \Honed\Chart\Series\Series|array<int, \Honed\Chart\Series\Series> $series
+     *
+     * @param  Series|array<int, Series>  $series
      * @return $this
      */
     public function series(Series|array $series): static
@@ -32,8 +32,8 @@ trait HasSeries
 
     /**
      * Get the series.
-     * 
-     * @return array<int, \Honed\Chart\Series\Series>
+     *
+     * @return array<int, Series>
      */
     public function getSeries(): array
     {
@@ -42,7 +42,7 @@ trait HasSeries
 
     /**
      * Get the series representation.
-     * 
+     *
      * @return array<int, array<string, mixed>>
      */
     public function seriesToArray(): array

@@ -10,14 +10,14 @@ trait HasChartType
 {
     /**
      * The type of the series.
-     * 
+     *
      * @var string|null
      */
     protected $type;
 
     /**
      * Set the type of the series.
-     * 
+     *
      * @return $this
      */
     public function type(string|ChartType $value): static

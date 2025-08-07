@@ -16,14 +16,14 @@ class AxisLine extends Primitive implements NullsAsUndefined
 
     /**
      * Whether the X or Y axis lines on the other's origin position.
-     * 
+     *
      * @var bool|null
      */
     protected $onZero;
 
     /**
      * When multiple axes exists, this option can be used to specify which axis.
-     * 
+     *
      * @var int|null
      */
     protected $onZeroAxisIndex;
@@ -38,7 +38,7 @@ class AxisLine extends Primitive implements NullsAsUndefined
 
     /**
      * Set whether the X or Y axis lines on the other's origin position.
-     * 
+     *
      * @return $this
      */
     public function onZero(bool $value = true): static
@@ -50,7 +50,7 @@ class AxisLine extends Primitive implements NullsAsUndefined
 
     /**
      * Set whether the X or Y axis lines do not on the other's origin position.
-     * 
+     *
      * @return $this
      */
     public function notOnZero(bool $value = true): static
@@ -60,7 +60,7 @@ class AxisLine extends Primitive implements NullsAsUndefined
 
     /**
      * Get whether the X or Y axis lines on the other's origin position.
-     * 
+     *
      * @return false|null
      */
     public function isOnZero(): ?bool
@@ -78,7 +78,7 @@ class AxisLine extends Primitive implements NullsAsUndefined
 
     /**
      * Get the array representation of the axis line.
-     * 
+     *
      * @return array<string, mixed>
      */
     protected function representation(): array

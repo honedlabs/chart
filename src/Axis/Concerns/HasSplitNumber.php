@@ -8,14 +8,14 @@ trait HasSplitNumber
 {
     /**
      * The minimum value.
-     * 
+     *
      * @var int|string|null
      */
     protected $splitNumber;
 
     /**
      * Set the minimum value.
-     * 
+     *
      * @return $this
      */
     public function splitNumber(int|string $value): static

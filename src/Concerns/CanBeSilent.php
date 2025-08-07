@@ -8,15 +8,14 @@ trait CanBeSilent
 {
     /**
      * Whether to ignore events.
-     * 
+     *
      * @var bool|null
      */
     protected $silent;
 
     /**
      * Set whether to ignore events.
-     * 
-     * @param bool|null $value
+     *
      * @return $this
      */
     public function silent(?bool $value): static
@@ -28,7 +27,7 @@ trait CanBeSilent
 
     /**
      * Set whether to not ignore events.
-     * 
+     *
      * @return $this
      */
     public function notSilent(bool $value = true): static
@@ -38,7 +37,7 @@ trait CanBeSilent
 
     /**
      * Get whether to ignore events.
-     * 
+     *
      * @return true|null
      */
     public function isSilent(): ?bool

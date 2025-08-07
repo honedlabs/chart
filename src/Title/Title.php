@@ -30,27 +30,27 @@ use Honed\Core\Primitive;
 
 class Title extends Primitive implements NullsAsUndefined
 {
-    use HasId;
     use CanBeShown;
     use CanHaveUrl;
-    use HasText;
-    use HasZAxis;
-    use HasTextStyle;
-    use HasLeft;
-    use HasTop;
-    use HasRight;
-    use HasBottom;
     use HasBackgroundColor;
     use HasBorderColor;
-    use HasBorderWidth;
     use HasBorderRadius;
+    use HasBorderWidth;
+    use HasBottom;
+    use HasId;
+    use HasItemGap;
+    use HasLeft;
+    use HasPadding;
+    use HasRight;
     use HasShadowBlur;
     use HasShadowColor;
     use HasShadowOffset;
-    use HasItemGap;
-    use HasPadding;
-    use HasSubtextStyle;
     use HasSubtext;
+    use HasSubtextStyle;
+    use HasText;
+    use HasTextStyle;
+    use HasTop;
+    use HasZAxis;
 
     /**
      * Create a new title instance.
@@ -62,7 +62,7 @@ class Title extends Primitive implements NullsAsUndefined
 
     /**
      * Get the representation of the title.
-     * 
+     *
      * @return array<string, mixed>
      */
     protected function representation(): array
