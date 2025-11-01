@@ -6,7 +6,6 @@ namespace Honed\Chart\Label;
 
 use Honed\Chart\Concerns\CanBeShown;
 use Honed\Chart\Label\Concerns\HasDistance;
-use Honed\Chart\Style\Concerns\CanBeRotated;
 use Honed\Chart\Style\Concerns\HasBackgroundColor;
 use Honed\Chart\Style\Concerns\HasBorderColor;
 use Honed\Chart\Style\Concerns\HasBorderRadius;
@@ -31,7 +30,6 @@ use Honed\Core\Primitive;
 
 class Label extends Primitive implements NullsAsUndefined
 {
-    use HasRotation;
     use CanBeShown;
     use HasBackgroundColor;
     use HasBorderColor;
@@ -48,6 +46,7 @@ class Label extends Primitive implements NullsAsUndefined
     use HasLineHeight;
     use HasOverflow;
     use HasPadding;
+    use HasRotation;
     use HasShadowBlur;
     use HasShadowColor;
     use HasShadowOffset;

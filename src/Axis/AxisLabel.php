@@ -7,7 +7,6 @@ namespace Honed\Chart\Axis;
 use Honed\Chart\Axis\Concerns\CanBeInside;
 use Honed\Chart\Axis\Concerns\HasInterval;
 use Honed\Chart\Concerns\CanBeShown;
-use Honed\Chart\Style\Concerns\CanBeRotated;
 use Honed\Chart\Style\Concerns\HasBackgroundColor;
 use Honed\Chart\Style\Concerns\HasBorderColor;
 use Honed\Chart\Style\Concerns\HasColor;
@@ -23,8 +22,6 @@ use Honed\Core\Primitive;
 class AxisLabel extends Primitive implements NullsAsUndefined
 {
     use CanBeInside;
-    use HasRotation;
-    use HasMargin;
     use CanBeShown;
     use HasBackgroundColor;
     use HasBorderColor;
@@ -34,6 +31,8 @@ class AxisLabel extends Primitive implements NullsAsUndefined
     use HasFontStyle;
     use HasFontWeight;
     use HasInterval;
+    use HasMargin;
+    use HasRotation;
 
     /**
      * Create a new axis label instance.

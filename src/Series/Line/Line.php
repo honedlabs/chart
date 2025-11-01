@@ -9,12 +9,12 @@ use Honed\Chart\Concerns\HasItemStyle;
 use Honed\Chart\Concerns\HasLabelLayout;
 use Honed\Chart\Concerns\HasLabelLine;
 use Honed\Chart\Enums\ChartType;
+use Honed\Chart\Series\Concerns\CanBeSmooth;
 use Honed\Chart\Series\Concerns\HasColorBy;
 use Honed\Chart\Series\Concerns\HasSampling;
 use Honed\Chart\Series\Concerns\HasStack;
 use Honed\Chart\Series\Concerns\HasStackOrder;
 use Honed\Chart\Series\Concerns\HasStackStrategy;
-use Honed\Chart\Series\Concerns\CanBeSmooth;
 use Honed\Chart\Series\Line\Concerns\CanConnectNulls;
 use Honed\Chart\Series\Line\Concerns\HasCoordinateSystem;
 use Honed\Chart\Series\Line\Concerns\HasSmoothMonotone;
@@ -30,18 +30,19 @@ class Line extends Series
     use HasAreaStyle;
     use HasColorBy;
     use HasCoordinateSystem;
+    use HasItemStyle;
+    use HasLabelLayout;
     use HasLabelLine;
     use HasSampling;
     use HasSmoothMonotone;
     use HasStack;
     use HasStackOrder;
+
     use HasStackStrategy;
-    use HasLabelLayout;
     // use HasSymbolRotate;
     use HasStep;
     use HasSymbol;
     use HasSymbolSize;
-    use HasItemStyle;
 
     /**
      * Provide the series with any necessary setup.

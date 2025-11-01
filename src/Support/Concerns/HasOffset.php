@@ -16,7 +16,7 @@ trait HasOffset
     /**
      * Set the offset.
      *
-     * @param int|array{0: int, 1: int} $value
+     * @param  int|array{0: int, 1: int}  $value
      * @return $this
      */
     public function offset(int|array $value): static

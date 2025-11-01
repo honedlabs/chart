@@ -16,7 +16,6 @@ use Honed\Chart\Concerns\HasTextStyle;
 use Honed\Chart\Concerns\HasTooltip;
 use Honed\Chart\Concerns\HasZAxis;
 use Honed\Chart\Legend\Concerns\HasLegendType;
-use Honed\Chart\Style\Concerns\CanBeRotated;
 use Honed\Chart\Style\Concerns\HasBackgroundColor;
 use Honed\Chart\Style\Concerns\HasBorderColor;
 use Honed\Chart\Style\Concerns\HasBorderRadius;
@@ -40,7 +39,6 @@ use Honed\Core\Primitive;
 
 class Legend extends Primitive implements NullsAsUndefined
 {
-    use HasRotation;
     use CanBeShown;
     use HasBackgroundColor;
     use HasBorderColor;
@@ -62,6 +60,7 @@ class Legend extends Primitive implements NullsAsUndefined
     use HasOrientation;
     use HasPadding;
     use HasRight;
+    use HasRotation;
     use HasShadowBlur;
     use HasShadowColor;
     use HasShadowOffset;

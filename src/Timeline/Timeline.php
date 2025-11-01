@@ -19,10 +19,10 @@ class Timeline extends Primitive implements NullsAsUndefined
     // use HasSymbolPosition;
     // use HasSymbolRotate;
     use CanKeepAspect;
+
     // use HasAxisType;
     use HasSymbol;
     use HasSymbolOffset;
-
     use HasSymbolSize;
 
     /**

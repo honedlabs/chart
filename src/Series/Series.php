@@ -11,7 +11,6 @@ use Honed\Chart\Concerns\HasZAxis;
 use Honed\Chart\Contracts\Resolvable;
 use Honed\Chart\Series\Concerns\CanBeClipped;
 use Honed\Chart\Series\Concerns\HasChartType;
-use Honed\Chart\Series\Concerns\RefersToAxis;
 use Honed\Chart\Style\Concerns\HasCursor;
 use Honed\Core\Concerns\HasName;
 use Honed\Core\Contracts\NullsAsUndefined;

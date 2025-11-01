@@ -21,18 +21,18 @@ use Honed\Core\Primitive;
 
 class SelectorLabel extends Primitive implements NullsAsUndefined
 {
+    use CanBeAligned;
     use CanBeShown;
-    use HasDistance;
-    use HasRotation;
-    use HasOffset;
+    use CanBeVerticallyAligned;
     use HasColor;
-    use HasFontStyle;
-    use HasFontWeight;
+    use HasDistance;
     use HasFontFamily;
     use HasFontSize;
-    use CanBeAligned;
-    use CanBeVerticallyAligned;
+    use HasFontStyle;
+    use HasFontWeight;
     use HasLineHeight;
+    use HasOffset;
+    use HasRotation;
 
     /**
      * Create a new selector label instance.

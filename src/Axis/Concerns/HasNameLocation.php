@@ -15,7 +15,7 @@ trait HasNameLocation
 
     /**
      * Set the location of the name.
-     * 
+     *
      * @return $this
      */
     public function nameLocation(string|Location $value): static
@@ -27,7 +27,7 @@ trait HasNameLocation
 
     /**
      * Set the location of the name to be start.
-     * 
+     *
      * @return $this
      */
     public function nameLocationStart(): static
@@ -37,7 +37,7 @@ trait HasNameLocation
 
     /**
      * Set the location of the name to be center.
-     * 
+     *
      * @return $this
      */
     public function nameLocationCenter(): static
@@ -47,7 +47,7 @@ trait HasNameLocation
 
     /**
      * Set the location of the name to be end.
-     * 
+     *
      * @return $this
      */
     public function nameLocationEnd(): static
