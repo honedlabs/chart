@@ -28,6 +28,8 @@ use Honed\Chart\Concerns\HasId;
 use Honed\Chart\Concerns\HasTooltip;
 use Honed\Chart\Concerns\HasZAxis;
 use Honed\Chart\Contracts\Resolvable;
+use Honed\Chart\Support\Concerns\HasOffset;
+use Honed\Chart\Support\Concerns\HasPosition;
 use Honed\Core\Contracts\NullsAsUndefined;
 use Honed\Core\Primitive;
 
@@ -43,6 +45,7 @@ class Axis extends Primitive implements NullsAsUndefined, Resolvable
     use HasAxisPointer;
     use HasAxisType;
     use HasBoundaryGap;
+    use HasBoundaryGap;
     use HasDimension;
     use HasGridIndex;
     use HasId;
@@ -52,6 +55,8 @@ class Axis extends Primitive implements NullsAsUndefined, Resolvable
     use HasMaxInterval;
     use HasMin;
     use HasMinInterval;
+    use HasOffset;
+    use HasPosition;
     use HasSplitNumber;
     use HasStartValue;
     use HasTooltip;
@@ -89,8 +94,8 @@ class Axis extends Primitive implements NullsAsUndefined, Resolvable
             'show' => $this->isShown(),
             'gridIndex' => $this->getGridIndex(),
             'alignTicks' => $this->hasAlignedTicks(),
-            // 'position' => $this->getPosition(),
-            // 'offset' => $this->getOffset(),
+            'position' => $this->getPosition(),
+            'offset' => $this->getOffset(),
             'type' => $this->getType(),
             // 'name' => null,
             // 'nameLocation' => null,
@@ -99,17 +104,17 @@ class Axis extends Primitive implements NullsAsUndefined, Resolvable
             // 'nameRotate' => $this->getNameRotate(),
             // 'nameTruncate' => $this->getTruncate()?->toArray(),
             'inverse' => $this->isInverted(),
-            'boundaryGap' => null,
-            'min' => null,
-            'max' => null,
-            'scale' => $this->isScaled(),
+            'boundaryGap' => $this->getBoundaryGap(),
+            'min' => $this->getMin(),
+            'max' => $this->getMax(),
+            'scale' => $this->isScaled() ?: null,
             'splitNumber' => $this->getSplitNumber(),
             'minInterval' => $this->getMinInterval(),
             'maxInterval' => $this->getMaxInterval(),
             'interval' => $this->getInterval(),
             'logBase' => $this->getLogBase(),
             'startValue' => $this->getStartValue(),
-            'silent' => $this->isSilent(),
+            'silent' => $this->isSilent() ?: null,
             // 'triggerEvent' => $this->isTriggerable(),
             // 'axisLine',
             // 'axisTick',

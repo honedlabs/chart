@@ -23,6 +23,7 @@ trait HasSeries
      */
     public function series(Series|array $series): static
     {
+        /** @var array<int, Series> */
         $series = is_array($series) ? $series : func_get_args();
 
         $this->series = [...$this->series, ...$series];

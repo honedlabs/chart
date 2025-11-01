@@ -22,7 +22,7 @@ trait HasChartType
      */
     public function type(string|ChartType $value): static
     {
-        $this->type = $value instanceof ChartType ? $value->value : $value;
+        $this->type = is_string($value) ? $value : $value->value;
 
         return $this;
     }
@@ -30,7 +30,7 @@ trait HasChartType
     /**
      * Get the type of the series.
      */
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }

@@ -40,8 +40,6 @@ trait CanBeDisabled
 
     /**
      * Get whether to disable the emphasis state.
-     *
-     * @return bool|null
      */
     public function isDisabled(): bool
     {
