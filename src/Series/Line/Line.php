@@ -37,8 +37,8 @@ class Line extends Series
     use HasSmoothMonotone;
     use HasStack;
     use HasStackOrder;
-
     use HasStackStrategy;
+
     // use HasSymbolRotate;
     use HasStep;
     use HasSymbol;
