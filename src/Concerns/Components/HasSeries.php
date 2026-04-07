@@ -1,0 +1,89 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Honed\Chart\Concerns\Components;
+
+use Honed\Chart\Enums\ChartType;
+use Honed\Chart\Series\Series;
+use Illuminate\Support\Collection;
+
+/**
+ * @phpstan-require-extends \Honed\Chart\Chartable
+ */
+trait HasSeries
+{
+    /**
+     * List of the series.
+     *
+     * @var Collection<int, Series>|null
+     */
+    protected $series;
+
+    /**
+     * Merge the series.
+     *
+     * @param  Series|list<Series>  $series
+     * @return $this
+     */
+    public function series(Series|array $series): static
+    {
+        /** @var list<Series> */
+        $series = is_array($series) ? $series : func_get_args();
+
+        $this->series = $this->getSeries()->merge($series);
+
+        return $this;
+    }
+
+    /**
+     * Get the series.
+     *
+     * @return Collection<int, Series>
+     */
+    public function getSeries(): Collection
+    {
+        return $this->series ??= new Collection();
+    }
+
+    /**
+     * Determine if the chart has a series of the given type.
+     */
+    public function hasSeries(?ChartType $type = null): bool
+    {
+        if (is_null($type)) {
+            return $this->getSeries()->isNotEmpty();
+        }
+
+        return $this->getSeries()
+            ->contains(
+                static fn (Series $series) => $series->getType() === $type
+            );
+    }
+
+    /**
+     * Get the list of series.
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function listSeries(): array
+    {
+        /** @var list<array<string, mixed>> */
+        return array_map(
+            static fn (Series $series) => $series->toArray(),
+            $this->getSeries()->all()
+        );
+    }
+
+    /**
+     * Resolve the series with the given data.
+     *
+     * @param  list<mixed>  $data
+     */
+    protected function resolveSeries(mixed $data): void
+    {
+        foreach ($this->getSeries() as $series) {
+            $series->resolve($data);
+        }
+    }
+}

@@ -4,12 +4,22 @@ declare(strict_types=1);
 
 namespace Honed\Chart\Style;
 
-use Honed\Chart\Style\Concerns\HasRGB;
+use Honed\Chart\Concerns\Style\HasRGB;
 use Stringable;
 
 class Rgb implements Stringable
 {
     use HasRGB;
+
+    /**
+     * Create a new RGB instance.
+     */
+    final public function __construct(int $red = 0, int $green = 0, int $blue = 0)
+    {
+        $this->red($red);
+        $this->green($green);
+        $this->blue($blue);
+    }
 
     /**
      * Get the string representation of the RGB color.
@@ -24,10 +34,7 @@ class Rgb implements Stringable
      */
     public static function make(int $red = 0, int $green = 0, int $blue = 0): static
     {
-        return resolve(static::class)
-            ->red($red)
-            ->green($green)
-            ->blue($blue);
+        return new static($red, $green, $blue);
     }
 
     /**

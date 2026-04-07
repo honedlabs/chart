@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Honed\Chart\Style;
 
-use Honed\Chart\Style\Concerns\HasColor;
-use Honed\Chart\Style\Concerns\HasOffset;
+use Honed\Chart\Concerns\Style\HasColor;
+use Honed\Chart\Concerns\Style\HasOffset;
 use Illuminate\Contracts\Support\Arrayable;
 
 /**
@@ -19,11 +19,18 @@ class ColorStop implements Arrayable
     /**
      * Create a new color stop.
      */
+    final public function __construct(string|Rgb|Rgba $color, int $offset = 0)
+    {
+        $this->color($color);
+        $this->offset($offset);
+    }
+
+    /**
+     * Create a new color stop.
+     */
     public static function make(string|Rgb|Rgba $color, int $offset = 0): static
     {
-        return resolve(static::class)
-            ->color($color)
-            ->offset($offset);
+        return new static($color, $offset);
     }
 
     /**

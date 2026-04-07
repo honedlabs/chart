@@ -4,14 +4,35 @@ declare(strict_types=1);
 
 namespace Honed\Chart\Style;
 
-use Honed\Chart\Style\Concerns\HasAlpha;
-use Honed\Chart\Style\Concerns\HasRGB;
+use Exception;
+use Honed\Chart\Concerns\Style\HasRGB;
 use Stringable;
 
 class Rgba implements Stringable
 {
-    use HasAlpha;
     use HasRGB;
+
+    /**
+     * The alpha component of the color.
+     *
+     * @var int
+     */
+    protected $alpha = 1;
+
+    /**
+     * Create a new RGBA instance.
+     */
+    final public function __construct(
+        int $red = 0,
+        int $green = 0,
+        int $blue = 0,
+        int $alpha = 1
+    ) {
+        $this->red($red);
+        $this->green($green);
+        $this->blue($blue);
+        $this->alpha($alpha);
+    }
 
     /**
      * Get the string representation of the RGBA color.
@@ -24,13 +45,37 @@ class Rgba implements Stringable
     /**
      * Create a new RGBA instance.
      */
-    public static function make(int $red = 0, int $green = 0, int $blue = 0, int $alpha = 1): static
+    public static function make(
+        int $red = 0,
+        int $green = 0,
+        int $blue = 0,
+        int $alpha = 1
+    ): static {
+        return new static($red, $green, $blue, $alpha);
+    }
+
+    /**
+     * Set the alpha component of the color.
+     *
+     * @return $this
+     */
+    public function alpha(int $alpha): static
     {
-        return resolve(static::class)
-            ->red($red)
-            ->green($green)
-            ->blue($blue)
-            ->alpha($alpha);
+        if ($alpha < 0 || $alpha > 1) {
+            throw new Exception('Alpha must be between 0 and 1');
+        }
+
+        $this->alpha = $alpha;
+
+        return $this;
+    }
+
+    /**
+     * Get the alpha component of the color.
+     */
+    public function getAlpha(): int
+    {
+        return $this->alpha;
     }
 
     /**

@@ -4,46 +4,125 @@ declare(strict_types=1);
 
 namespace Honed\Chart\Series;
 
-use Honed\Chart\Concerns\Animatable;
-use Honed\Chart\Concerns\Extractable;
+use Honed\Chart\Chart;
+use Honed\Chart\Chartable;
+use Honed\Chart\Concerns\Components\HasEmphasis;
+use Honed\Chart\Concerns\Components\HasTooltip;
 use Honed\Chart\Concerns\HasId;
-use Honed\Chart\Concerns\HasZAxis;
+use Honed\Chart\Concerns\InteractsWithData;
+use Honed\Chart\Concerns\Proxies\Proxyable;
+use Honed\Chart\Concerns\Style\HasCursor;
+use Honed\Chart\Concerns\Support\Inferrable;
 use Honed\Chart\Contracts\Resolvable;
-use Honed\Chart\Series\Concerns\CanBeClipped;
-use Honed\Chart\Series\Concerns\HasChartType;
-use Honed\Chart\Style\Concerns\HasCursor;
+use Honed\Chart\Enums\ChartType;
+use Honed\Chart\Proxies\HigherOrderEmphasis;
+use Honed\Chart\Proxies\HigherOrderTooltip;
 use Honed\Core\Concerns\HasName;
-use Honed\Core\Contracts\NullsAsUndefined;
-use Honed\Core\Primitive;
+use Illuminate\Support\Traits\ForwardsCalls;
+use TypeError;
+use ValueError;
 
-abstract class Series extends Primitive implements NullsAsUndefined, Resolvable
+/**
+ * @property-read HigherOrderEmphasis<static> $emphasis
+ * @property-read HigherOrderTooltip<static> $tooltip
+ */
+abstract class Series extends Chartable implements Resolvable
 {
-    use Animatable;
-    use CanBeClipped;
-    use Extractable;
-    use HasChartType;
+    use ForwardsCalls;
     use HasCursor;
+    use HasEmphasis;
     use HasId;
     use HasName;
-    use HasZAxis;
+    use HasTooltip;
+    use Inferrable;
+    use InteractsWithData;
+    use Proxyable;
 
     /**
-     * Create a new series instance.
+     * The type of the series.
+     *
+     * @var ChartType
      */
-    public static function make(?string $name = null): static
+    public $type;
+
+    /**
+     * Get a property of the series.
+     *
+     * @param  non-empty-string  $name
+     */
+    public function __get(string $name): mixed
     {
-        return resolve(static::class)
-            ->when($name, fn (self $series, string $name) => $series->name($name));
+        return match ($name) {
+            'emphasis' => new HigherOrderEmphasis($this, $this->withEmphasis()),
+            'tooltip' => new HigherOrderTooltip($this, $this->withTooltip()),
+            default => $this->defaultGet($name),
+        };
+    }
+
+    /**
+     * Determine if the series requires axes to be provided.
+     */
+    public function requiresAxes(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Set the type of the series.
+     *
+     * @return $this
+     *
+     * @throws ValueError
+     * @throws TypeError
+     */
+    public function type(string|ChartType $value): static
+    {
+        $this->type = is_string($value) ? ChartType::from($value) : $value;
+
+        return $this;
+    }
+
+    /**
+     * Get the type of the series.
+     */
+    public function getType(): ChartType
+    {
+        return $this->type;
+    }
+
+    /**
+     * Convert the series directly to a chart.
+     */
+    public function toChart(): Chart
+    {
+        return Chart::make()
+            ->source($this->getSource())
+            ->category($this->getCategory())
+            ->value($this->getValue())
+            ->infer($this->infers())
+            ->series($this);
     }
 
     /**
      * Resolve the series with the given data.
+     *
+     * @param  list<mixed>  $data
      */
     public function resolve(mixed $data): void
     {
         $this->define();
 
-        $this->data($this->extract($data));
+        if ($this->hasData()) {
+            return;
+        }
+
+        $data = $this->retrieve($data, $this->getValue());
+
+        if (is_null($data)) {
+            return;
+        }
+
+        $this->data($data);
     }
 
     /**
@@ -56,14 +135,14 @@ abstract class Series extends Primitive implements NullsAsUndefined, Resolvable
         $this->define();
 
         return [
-            'type' => $this->getType(),
+            'type' => $this->getType()->value,
             'id' => $this->getId(),
-            'name' => $this->name,
+            'name' => isset($this->name) ? $this->getName() : null, // @phpstan-ignore-line
             'data' => $this->getData(),
             'cursor' => $this->getCursor(),
-            'clip' => $this->isClipped() ? null : false,
+            'emphasis' => $this->getEmphasis()?->toArray(),
+            // 'clip' => $this->isClipped() ? null : false,
             // ...$this->getZAxisParameters(),
-            ...$this->getAnimationParameters(),
         ];
     }
 }
