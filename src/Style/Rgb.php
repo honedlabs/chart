@@ -40,7 +40,7 @@ class Rgb implements Stringable
     /**
      * Get the string representation of the RGB color.
      *
-     * @see Rgb::__toString()
+     * @see \Honed\Chart\Style\Rgb::__toString()
      */
     public function toString(): string
     {
@@ -50,7 +50,7 @@ class Rgb implements Stringable
     /**
      * Get the string representation of the RGB color.
      *
-     * @see Rgb::__toString()
+     * @see \Honed\Chart\Style\Rgb::__toString()
      */
     public function value(): string
     {
